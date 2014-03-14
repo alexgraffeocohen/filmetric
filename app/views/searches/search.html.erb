@@ -1,5 +1,5 @@
-<%= form_tag searches_path, method: :get do %>
+<%= form_tag searches_path, { :method => :get, :class => ".form-search" }  do %>
   <%= label_tag(:q, "Search") %>
   <%= text_field_tag(:q) %>
-  <%= submit_tag "Search" %>
+  <%= submit_tag "Search", :class => "btn btn-lg btn-primary" %>
 <% end %>
