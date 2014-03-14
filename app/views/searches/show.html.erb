@@ -1,0 +1,5 @@
+<ul>
+  <% @results.each do |result| %>
+    <li><a href="<%= movie_path(result) %>"><%= result.title %></a></li>
+  <% end %>
+</ul>

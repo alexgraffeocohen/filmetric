@@ -1,0 +1,29 @@
+<h1><%= @movie.title %></h1>
+
+<span id="filmetric">
+  <%= @movie.filmetric %>
+</span>
+
+<h2>Info</h2>
+<p>
+  Release Year: <%= @movie.release_year %><br>
+  Rating: <%= @movie.rating %><br>
+  Critics’ Score: <%= @movie.critics_score %><br>
+  Audience Score: <%= @movie.critics_score %><br>
+  Directed By: <%= @movie.directors.first.name %>
+</p>
+
+<h2>Genres</h2>
+<ul>
+  <% @movie.genres.each do |genre| %>
+    <li><%= genre.name %></li>
+  <% end %>
+</ul>
+
+<h2>Actors</h2>
+<ul>
+  <% @movie.actors.each do |actor| %>
+    <li><%= actor.name %></li>
+  <% end %>
+</ul>
+
