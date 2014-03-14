@@ -1,6 +1,8 @@
 FilmetricRails::Application.routes.draw do
-  root 'movies#search'
-  get '/movies/search' => 'movies#search'
+  root 'searches#search'
+  get '/search' => 'searches#search' 
+  get '/movies/:id' => 'movies#show', as: 'movie'
+  get '/searches/' => 'searches#show', as: 'searches'
 
 
 
