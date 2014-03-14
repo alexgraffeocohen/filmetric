@@ -11,61 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313140535) do
+ActiveRecord::Schema.define(version: 20140313144836) do
 
   create_table "actor_movies", force: true do |t|
-    t.integer  "actor_id"
-    t.integer  "movie_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "actor_id"
+    t.integer "movie_id"
   end
 
   create_table "actors", force: true do |t|
-    t.string   "name"
-    t.integer  "filmetric"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name"
+    t.integer "filmetric"
   end
 
   create_table "director_movies", force: true do |t|
-    t.integer  "director_id"
-    t.integer  "movie_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "director_id"
+    t.integer "movie_id"
   end
 
   create_table "directors", force: true do |t|
-    t.string   "name"
-    t.integer  "filmetric"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name"
+    t.integer "filmetric"
   end
 
   create_table "genre_movies", force: true do |t|
-    t.integer  "genre_id"
-    t.integer  "movie_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "movie_id"
+    t.integer "genre_id"
   end
 
   create_table "genres", force: true do |t|
-    t.string   "name"
-    t.integer  "filmetric"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name"
+    t.integer "filmetric"
   end
 
   create_table "movies", force: true do |t|
-    t.string   "title"
-    t.integer  "release_year"
-    t.integer  "critics_score"
-    t.integer  "audience_score"
-    t.integer  "critics_consensus"
-    t.string   "poster_link"
-    t.string   "rating"
-    t.string   "rt_link"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "title"
+    t.integer "release_year"
+    t.integer "critics_score"
+    t.integer "audience_score"
+    t.string  "critics_consensus"
+    t.string  "poster_link"
+    t.string  "rating"
+    t.string  "rt_link"
+    t.integer "filmetric"
   end
 
 end
