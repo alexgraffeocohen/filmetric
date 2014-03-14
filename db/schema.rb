@@ -14,45 +14,59 @@
 ActiveRecord::Schema.define(version: 20140313144836) do
 
   create_table "actor_movies", force: true do |t|
-    t.integer "actor_id"
-    t.integer "movie_id"
+    t.integer  "actor_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "actors", force: true do |t|
-    t.string  "name"
-    t.integer "filmetric"
+    t.string   "name"
+    t.integer  "filmetric"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "director_movies", force: true do |t|
-    t.integer "director_id"
-    t.integer "movie_id"
+    t.integer  "director_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "directors", force: true do |t|
-    t.string  "name"
-    t.integer "filmetric"
+    t.string   "name"
+    t.integer  "filmetric"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "genre_movies", force: true do |t|
-    t.integer "movie_id"
-    t.integer "genre_id"
+    t.integer  "genre_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "genres", force: true do |t|
-    t.string  "name"
-    t.integer "filmetric"
+    t.string   "name"
+    t.integer  "filmetric"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "movies", force: true do |t|
-    t.string  "title"
-    t.integer "release_year"
-    t.integer "critics_score"
-    t.integer "audience_score"
-    t.string  "critics_consensus"
-    t.string  "poster_link"
-    t.string  "rating"
-    t.string  "rt_link"
-    t.integer "filmetric"
+    t.string   "title"
+    t.integer  "release_year"
+    t.integer  "critics_score"
+    t.integer  "audience_score"
+    t.integer  "critics_consensus"
+    t.string   "poster_link"
+    t.string   "rating"
+    t.string   "rt_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "filmetric"
   end
 
 end

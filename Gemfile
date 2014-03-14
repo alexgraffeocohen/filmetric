@@ -35,10 +35,15 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  
+end
+
 group :test do
-  gem "rspec"
-  gem "pry"
-  gem "awesome_print"
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'pry'
+  gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password

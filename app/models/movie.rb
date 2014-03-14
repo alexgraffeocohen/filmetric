@@ -12,4 +12,8 @@ class Movie < ActiveRecord::Base
       movie.save
     end
   end
+
+  def calculate_filmetric
+    filmetric = critics_score - audience_score
+  end
 end
