@@ -8,7 +8,6 @@
 
 the_departed = Movie.new(
 
-                   :id => 407887,
                 :title => "The Departed",
          :release_year => 2006,
         :critics_score => 92,
@@ -24,6 +23,7 @@ drama = Genre.new(name: "Drama", filmetric: -5)
 action_adventure = Genre.new(name: "Action & Adventure", filmetric: -6)
 mystery_suspense = Genre.new(name: "Mystery & Suspense", filmetric: -4)
 the_departed.genres << drama << action_adventure << mystery_suspense
+the_departed.actors << [Actor.new(name: "Leonardo DiCaprio", filmetric: -6), Actor.new(name: "Matt Damon", filmetric: 1), Actor.new(name: "Jack Nicholson", filmetric: -5), Actor.new(name: "Mark Wahlberg", filmetric: -4), Actor.new(name: "Martin Sheen", filmetric: 1)]
 
 the_departed.save
 
