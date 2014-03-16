@@ -1,5 +1,9 @@
-<ul>
-  <% @results.each do |result| %>
-    <li><a href="<%= movie_path(result) %>"><%= result.title %></a></li>
-  <% end %>
-</ul>
+<div class="col-md-8" id="results-container">
+  <h1>Search Results:</h1>
+
+  <ul>
+    <% @results.each do |result| %>
+      <li><a href="<%= movie_path(result) %>"><%= result.title %></a></li>
+    <% end %>
+  </ul>
+</div>

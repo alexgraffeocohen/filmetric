@@ -1,8 +1,10 @@
-<%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
-  <div class="form-group col-md-offset-4">
-    <%= label_tag :q, "Search", :class => "sr-only" %>
-    <%= text_field_tag :q, "", :class => "form-control input-lg" %>
-    
-    <%= submit_tag "Search", :class => "btn btn-lg btn-primary" %>
-  </div>
-<% end %>
+<div id="search-container">
+  <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
+    <div class="form-group" id="search-box">
+      <%= label_tag :q, "Search", :class => "sr-only" %>
+      <%= text_field_tag :q, "", :class => "form-control input-lg" %>
+      
+      <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
+    </div>
+  <% end %>
+</div>

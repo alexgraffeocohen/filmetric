@@ -1,3 +1,18 @@
 // Place all the styles related to the Movie controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#poster-container {
+  margin-top: 20px;
+  .poster {
+  width: 80%;
+  } 
+}
+
+#movie-data {
+  margin-left: 20px;
+}
+
+
+
+
