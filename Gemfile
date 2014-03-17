@@ -38,7 +38,7 @@ group :doc do
 end
 
 group :development do
-  
+  gem 'quiet_assets'
 end
 
 group :test do
