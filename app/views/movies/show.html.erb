@@ -3,9 +3,9 @@
     <div id="item-data">
       <h1><%= @movie.title %></h1>
 
-      <% if @average > 70 %>
+      <% if @average > 75 %>
         <span id="filmetric-good"><%= @movie.filmetric %></span>
-      <% elsif @average.between?(50,70) %>
+      <% elsif @average.between?(50,75) %>
         <span id="filmetric-ok"><%= @movie.filmetric %></span>
       <% elsif @average < 50 %>
         <span id="filmetric-bad"><%= @movie.filmetric %></span>
