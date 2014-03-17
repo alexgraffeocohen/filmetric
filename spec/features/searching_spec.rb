@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'executing a search' do 
+describe 'executing a movie search' do 
   before do
     Movie.create({
                    :id => 1454468,
@@ -26,10 +26,71 @@ describe 'executing a search' do
     end
     
     it 'should execute a new search' do
+      select('Movie', :from => 'category')
       fill_in 'q', with: 'Gravity'
       click_button('Search')
 
       expect(page).to have_content("Gravity")
+    end
+  end
+end
+
+describe 'executing an actor search' do
+  before do
+    Actor.create(name: "Brad Pitt", filmetric: -5)
+  end
+
+  context 'on the search page' do
+    before do
+      visit search_path
+    end
+
+    it 'should correctly find an actor' do
+      select('Actor', :from => 'category')
+      fill_in 'q', with: 'Brad'
+      click_button('Search')
+
+      expect(page).to have_content("Brad Pitt")
+    end
+  end
+end
+
+describe 'executing a director search' do
+  before do
+    Director.create(name: "Michael Bay", filmetric: -28)
+  end
+
+  context 'on the search page' do
+    before do
+      visit search_path
+    end
+
+    it 'should correctly find an actor' do
+      select('Director', :from => 'category')
+      fill_in 'q', with: 'Michael Bay'
+      click_button('Search')
+
+      expect(page).to have_content("Michael Bay")
+    end
+  end
+end
+
+describe 'executing a genre search' do
+  before do
+    Genre.create(name: "Action", filmetric: -5)
+  end
+
+  context 'on the search page' do
+    before do
+      visit search_path
+    end
+
+    it 'should correctly find an actor' do
+      select('Genre', :from => 'category')
+      fill_in 'q', with: 'Action'
+      click_button('Search')
+
+      expect(page).to have_content("Action")
     end
   end
 end

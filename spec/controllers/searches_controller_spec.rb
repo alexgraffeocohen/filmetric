@@ -8,5 +8,9 @@ describe SearchesController do
     end
   end
 
-
+  describe "GET #show" do
+    it 'responds with a 200 status code' do
+      get :show
+      expect(response).to be_a_success
+    end
 end 
