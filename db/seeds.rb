@@ -10,6 +10,7 @@ the_departed = Movie.new(
 
                 :title => "The Departed",
          :release_year => 2006,
+            :filmetric => -2,
         :critics_score => 92,
        :audience_score => 94,
     :critics_consensus => "Featuring outstanding work from an excellent cast that includes Jack Nicholson, Leonardo DiCaprio, and Matt Damon, The Departed is a thoroughly engrossing gangster drama with the gritty authenticity and soupy morality that has infused director Martin Scorsese's past triumphs.",

@@ -1,32 +1,37 @@
 <div class="row">
-  <div id="movie-container" class="col-md-8">
-    <div id="movie-data">
+  <div class="col-md-8">
+    <div id="item-data">
       <h1><%= @movie.title %></h1>
 
-      <span id="filmetric">
-        <%= @movie.filmetric %>
-      </span>
+      <% if @average > 70 %>
+        <span id="filmetric-good"><%= @movie.filmetric %></span>
+      <% elsif @average.between?(50,70) %>
+        <span id="filmetric-ok"><%= @movie.filmetric %></span>
+      <% elsif @average < 50 %>
+        <span id="filmetric-bad"><%= @movie.filmetric %></span>
+      <% end %>
 
       <h2>Info</h2>
       <p>
         Release Year: <%= @movie.release_year %><br>
         Rating: <%= @movie.rating %><br>
         Critics’ Score: <%= @movie.critics_score %><br>
-        Audience Score: <%= @movie.critics_score %><br>
-        Directed By: <%= @movie.directors.first.name %>
+        Audience Score: <%= @movie.audience_score %><br>
+        Directed By: <a href="<%= director_path(@movie.directors.first) %>">
+          <%= @movie.directors.first.name %></a>
       </p>
 
       <h2>Genres</h2>
       <ul>
         <% @movie.genres.each do |genre| %>
-          <li><%= genre.name %></li>
+          <li><a href="<%= genre_path(genre.id) %>"><%= genre.name %></a></li>
         <% end %>
       </ul>
 
       <h2>Actors</h2>
       <ul>
         <% @movie.actors.each do |actor| %>
-          <li><%= actor.name %></li>
+          <li><a href="<%= actor_path(actor.id) %>"><%= actor.name %></a></li>
         <% end %>
       </ul>
     </div>

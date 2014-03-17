@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 #poster-container {
   margin-top: 20px;
   .poster {
@@ -9,10 +10,30 @@
   } 
 }
 
-#movie-data {
+#item-data {
   margin-left: 20px;
+  li {
+    list-style-type: none;
+    margin-left: -30px;
+  }
+  p {
+    margin-left: 10px;
+  }
 }
 
+#filmetric-good {
+  font-size: 4em;
+  color: green;
+}
 
+#filmetric-ok {
+  font-size: 4em;
+  color: orange;
+}
+
+#filmetric-bad {
+  font-size: 4em;
+  color: red;
+}
 
 
