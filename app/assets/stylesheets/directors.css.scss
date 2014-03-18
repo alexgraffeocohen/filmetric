@@ -5,3 +5,18 @@
 #filmetric {
   font-size: 4em;
 }
+
+.good {
+  color: green;
+  a:hover {
+    color: green;
+  }
+}
+
+.ok {
+  color: orange;
+}
+
+.bad {
+  color: red;
+}

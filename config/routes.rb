@@ -8,6 +8,7 @@ FilmetricRails::Application.routes.draw do
   get '/actors/:id' => 'actors#show', as: 'actor'
   get '/directors/:id' => 'directors#show', as: 'director'
   get '/genres/:id' => 'genres#show', as: 'genre'
+  get '/charts' => 'charts#render_movies', as: 'charts'
 
 
 

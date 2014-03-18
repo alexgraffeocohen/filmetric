@@ -7,21 +7,26 @@
   </div>
 <% end %>
 
-<div id="search-container">
+<div id="container">
+  <div id="row">
+    <div id="search-container">
+      <h1>Filmetric:</h1>
+      <h2>the gap between critics and audience</h2>
+      <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
+        <div class="form-group" id="search-box">
+          <%= label_tag :category, "Category", :class => "sr-only" %>
+          <%= select_tag :category, 
+            "<option>Movie</option>
+             <option>Actor</option>
+             <option>Director</option>
+             <option>Genre</option>".html_safe, :class => "form-control input-lg", :id => "categories" %>
 
-  <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
-    <div class="form-group" id="search-box">
-      <%= label_tag :category, "Category", :class => "sr-only" %>
-      <%= select_tag :category, 
-        "<option>Movie</option>
-         <option>Actor</option>
-         <option>Director</option>
-         <option>Genre</option>".html_safe, :class => "form-control input-lg", :id => "categories" %>
-
-      <%= label_tag :q, "Search", :class => "sr-only" %>
-      <%= text_field_tag :q, "", :class => "form-control input-lg" %>
-      
-      <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
+          <%= label_tag :q, "Search", :class => "sr-only" %>
+          <%= text_field_tag :q, "", :class => "form-control input-lg" %>
+          
+          <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

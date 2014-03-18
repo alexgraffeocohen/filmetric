@@ -2,5 +2,7 @@
 @import "bootstrap/theme";
 
 .alert {
+  position: absolute;
+  width: 99%;
   margin: 5px;
 }
