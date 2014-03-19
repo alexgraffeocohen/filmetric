@@ -9,6 +9,17 @@
   background-size: 750px 100%;
 }
 
+#results-container {
+  li {
+    list-style-type: none;
+    font-size: 2em;
+    margin-bottom: 5px;
+  }
+  h1 {
+    margin-bottom: 30px;
+  }
+}
+
 #search-container {
   height: 1000px;
   width: 1000px;
@@ -18,12 +29,7 @@
     margin-left: 50px;
     font-size: 4em;
   }
-  h2 {
-    position: absolute;
-    margin-top: 180px;
-    margin-left: 75px;
-    font-size: 2em;
-  }
+
   #search-box {
     margin-top: 40%;
     margin-left: 50px;

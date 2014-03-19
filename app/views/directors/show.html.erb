@@ -8,7 +8,7 @@
 
       <h2>Movies</h2>
       <ul>
-        <% @director.movies.each do |movie| %>
+        <% @movies.each do |movie| %>
           <% @average = ((movie.critics_score + movie.audience_score) / 2) %>
           <% if @average >= 75 %>
             <li><a class="good" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
