@@ -7,13 +7,14 @@
   </div>
 <% end %>
 
-<div id="container">
+<div id="search-container">
   <div id="row">
-    <div id="search-container">
       <h1>Filmetric: <br><small>the gap between critics & audience</small></h1>
-      
-      <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
-        <div class="form-group" id="search-box">
+  </div>
+
+  <div id="row">
+    <div class="form-group" id="search-box"> 
+        <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
           <%= label_tag :category, "Category", :class => "sr-only" %>
           <%= select_tag :category, 
             "<option>Movie</option>
@@ -25,8 +26,27 @@
           <%= text_field_tag :q, "", :class => "form-control input-lg" %>
           
           <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
-        </div>
-      <% end %>
+        <% end %>
+    </div>
+  </div>
+
+  <div id="row">
+    <div id="strip-wrapper">
+      <div id="film-strip">
+        <% her = Movie.find_by(title: "Her") %>
+        <% gravity = Movie.find_by(title: "Gravity") %>
+        <% children = Movie.find_by(title: "Children of Men") %>
+        <% die = Movie.find_by(title: "Die Hard") %>
+        <% avatar = Movie.find_by(title: "Avatar") %>
+        <% ghostbusters = Movie.find_by(title: "Ghostbusters") %>
+        <% movies = [her, gravity, children, die, avatar, ghostbusters] %>
+        <% i = 0 %>
+        <% movies.each do |movie| %>
+          <a href="<%= movie_path(movie) %>"><img id="poster-thumbnail" src="<%= movie.poster_link %>"
+          style="left: <%= 17 + i %>px;"></a>
+          <% i += 250 %>
+        <% end %>  
+      </div>
     </div>
   </div>
 </div>

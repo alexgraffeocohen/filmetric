@@ -40,14 +40,14 @@ group :production do
   gem 'rails_12factor'
 end
 
-group :development do
+group :development, :test do
   gem 'quiet_assets'
+  gem 'pry'
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'pry'
   gem 'database_cleaner'
   gem 'awesome_print'
 end

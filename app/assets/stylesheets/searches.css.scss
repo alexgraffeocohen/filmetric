@@ -2,13 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#container {
-  background: url('new-film-background.png');
-  background-repeat: repeat-x;
-  background-position: bottom;
-  background-size: 40% 50%;
-}
-
 #nav {
   margin-bottom: 30px;
   margin-top: 10px;
@@ -35,8 +28,6 @@
 #search-container {
   position: relative;
   margin: auto;
-  height: 800px;
-  width: 1000px;
   h1 {
     text-align: center;
     font-size: 4em;
@@ -45,13 +36,9 @@
       font-size: 0.5em;
     }
   }
-
   #search-box {
-    position: absolute;
-    top: -200px;
-    left: 230px;
-    margin-top: 40%;
-    margin-left: 50px;
+    margin: 40px 5px 60px 5px;
+    text-align: center;
     #categories {
       margin-right: 5px;
     }
@@ -59,4 +46,22 @@
       margin-left: 5px;
     }
   }
+  #film-strip {
+    background: url('new-film-background2.png');
+    height: 500px;
+    background-size: 500px 100%;
+  }
+  #poster-thumbnail {
+    position: absolute;
+    height: 292px;
+    width: 217px;
+    border-radius: 14px;
+    margin-top: 104px;
+  }
+}
+
+#strip-wrapper {
+  margin: 0 auto;
+  width: 1500px;
+  overflow: auto;
 }
