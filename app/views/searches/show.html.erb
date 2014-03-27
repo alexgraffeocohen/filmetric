@@ -1,0 +1,19 @@
+<div class="col-md-8" id="results-container">
+  <%= render 'layouts/nav' %>
+
+  <h1>Search Results:</h1>
+
+  <ul>
+    <% @results.each do |result| %>
+      <% if result.is_a? Movie %>
+        <li><a href="<%= movie_path(result) %>"><%= result.title %> (<%= result.release_year %>)</a></li>
+      <% elsif result.is_a? Actor %>
+        <li><a href="<%= actor_path(result) %>"><%= result.name %></a></li>
+      <% elsif result.is_a? Director %>
+        <li><a href="<%= director_path(result) %>"><%= result.name %></a></li>
+      <% elsif result.is_a? Genre %>
+        <li><a href="<%= genre_path(result) %>"><%= result.name %></a></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

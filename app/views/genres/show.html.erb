@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-8">
+    
+     <%= render 'layouts/nav' %>
+
+    <div id="genre-data">
+
+      <h1><%= @genre.name %></h1>
+
+      
+      <span id="genre-filmetric"><%= @genre.filmetric %></span>
+
+      <h2>Movies</h2>
+      <ul>
+        <% @genre.movies.each do |movie| %>
+          <% @average = ((movie.critics_score + movie.audience_score) / 2) %>
+          <% if @average >= 75 %>
+            <li><a class="good" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
+          <% elsif @average.between?(50,75) %>
+            <li><a class="ok" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
+          <% elsif @average < 50 %>
+            <li><a class="bad" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
+          <% end %>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- <div id="image-container" class="col-md-4">
+    
+  </div> -->
+</div>

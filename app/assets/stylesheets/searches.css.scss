@@ -1,0 +1,58 @@
+// Place all the styles related to the Searches controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#results-container {
+  li {
+    list-style-type: none;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    margin-left: 20px;
+  }
+  h1 {
+    margin-bottom: 30px;
+    margin-left: 55px;
+    margin-top: 50px;
+  }
+}
+
+#search-container {
+  position: relative;
+  margin: auto;
+  h1 {
+    text-align: center;
+    font-size: 4em;
+    line-height: 1em;
+    small {
+      font-size: 0.5em;
+    }
+  }
+  #search-box {
+    margin: 40px 5px 60px 5px;
+    text-align: center;
+    #categories {
+      margin-right: 5px;
+    }
+    #search-button {
+      margin-left: 5px;
+    }
+  }
+  #film-strip {
+    background: url('new-film-background2.png');
+    height: 500px;
+    background-size: 500px 100%;
+      #poster-thumbnail {
+      position: absolute;
+      height: 292px;
+      width: 217px;
+      border-radius: 14px;
+      margin-top: 104px;
+    }
+  }
+}
+
+#strip-wrapper {
+  margin: 0 auto;
+  width: 1500px;
+  overflow: auto;
+}

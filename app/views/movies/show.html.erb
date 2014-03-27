@@ -1,0 +1,38 @@
+<div class="row">
+  <%= render 'layouts/nav' %>
+
+
+  <div class="col-md-7" id="data-container">
+    <h1><%= @movie.title %></h1>
+      
+    <%= render 'score_box' %>
+
+    <div id="item-data">
+      <h2>Info</h2>
+      <p>
+        Release Year: <%= @movie.release_year %><br>
+        Rating: <%= @movie.rating %><br>
+        Directed By: <a href="<%= director_path(@movie.directors.first) %>">
+          <%= @movie.directors.first.name %></a>
+      </p>
+
+      <h2>Genres</h2>
+      <ul>
+        <% @movie.genres.each do |genre| %>
+          <li><a href="<%= genre_path(genre.id) %>"><%= genre.name %></a></li>
+        <% end %>
+      </ul>
+
+      <h2>Actors</h2>
+      <ul>
+        <% @movie.actors.each do |actor| %>
+          <li><a href="<%= actor_path(actor.id) %>"><%= actor.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div id="poster-container" class="col-md-4">
+    <img src="<%= @movie.poster_link %>" class="img-responsive poster">
+  </div>
+</div>

@@ -1,0 +1,35 @@
+@import "bootstrap";
+@import "bootstrap/theme";
+
+.alert {
+  margin: 5px;
+}
+
+.good {
+  color: green;
+}
+
+.ok {
+  color: #f0ad4e;
+}
+
+.bad {
+  color: #d44950;
+}
+
+#nav {
+  margin-left: 50px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  a {
+    font-size: 1.25em;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  p {
+    font-size: 1.25em;
+    margin-left: 10px;
+    display: inline-block;
+    border-bottom: 1px grey solid;
+  }
+}

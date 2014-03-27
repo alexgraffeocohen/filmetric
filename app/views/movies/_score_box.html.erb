@@ -1,0 +1,11 @@
+<div id="score-box">
+  <p id="copyright"><strong>Rotten Tomatoes® Scores</strong></p>
+
+  <div id="scores">
+    <%= render 'critic_score' %> <span class="math">-</span> 
+    <%= render 'audience_score' %> <span class="math">=</span> 
+    <span id="filmetric" class="<%= quality_of(@movie) %>"><%= @movie.filmetric %></span>
+  </div>
+   
+  <p id="overview"><%= build_overview(@movie) %></p> 
+</div>

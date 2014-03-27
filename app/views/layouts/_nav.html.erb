@@ -1,0 +1,8 @@
+<div id="nav">
+    <%= link_to_unless_current "Home", root_path do %>
+      <p>Home</p>
+    <% end %> 
+    <%= link_to_unless_current "What the Hell Is This?", about_path do %>
+      <p>What the Hell Is This?</p>
+    <% end %>
+</div>

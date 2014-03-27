@@ -1,0 +1,7 @@
+<% if @movie.audience_score > 60 %> 
+  <a class="rt-score" href="<%= @movie.rt_link %>"><%= image_tag("popcorn.png", class: "good-rt-img") %></a>
+  <p class="rt-score"><%= @movie.audience_score %>%</p>
+<% else %> 
+  <a class="rt-score" href="<%= @movie.rt_link %>"><%= image_tag("spilled.png", class: "bad-rt-img") %></a> 
+  <p class="rt-score"><%= @movie.audience_score %>%</p>
+<% end %>
