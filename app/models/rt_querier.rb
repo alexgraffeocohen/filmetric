@@ -1,6 +1,7 @@
 class RTQuerier
   attr_accessor :data
   include RottenTomatoes
+  Rotten.api_key = ENV["RT_KEY"]
 
   def self.find_movie_by_imdb(imdb_id)
     RottenMovie.find(:imdb => imdb_id)
@@ -12,7 +13,6 @@ class RTQuerier
 
   def initialize(data)
     self.data = data
-    Rotten.api_key = ENV["RT_KEY"]
     @count = 0
   end
 

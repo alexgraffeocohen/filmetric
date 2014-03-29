@@ -50,6 +50,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'awesome_print'
+  gem 'simplecov'
 end
 
 # Use ActiveModel has_secure_password

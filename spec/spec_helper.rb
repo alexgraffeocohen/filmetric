@@ -5,6 +5,11 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 
+SimpleCov.start do
+  add_filter 'spec/'
+  add_filter 'config/'
+end
+
 DatabaseCleaner.strategy = :truncation
 
 # Requires supporting ruby files with custom matchers and macros, etc,
