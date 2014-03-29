@@ -20,12 +20,12 @@ describe RTQuerier do
   end
 
   it 'will not save non-matches by imdb id' do
-    bad_id = '9673657584'
+    bad_id = '9673657'
     expect{RTQuerier.new([bad_id]).query}.to_not change{Movie.count}.by(1)
   end
 
   it 'will not save movies already in db' do
-    Movie.create(id: "#{ids[0]}")    
+    Movie.create(id: "#{ids[0]}")  
     expect{RTQuerier.new([ids[0]]).query}.to_not change{Movie.count}.by(1)
   end
 
