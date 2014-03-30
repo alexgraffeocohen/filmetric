@@ -6,7 +6,7 @@
   <ul>
     <% @results.each do |result| %>
       <% if result.is_a? Movie %>
-        <li><a href="<%= movie_path(result) %>"><%= result.title %> (<%= result.release_year %>)</a></li>
+        <li><a href="<%= movie_path(result) %>"><%= result.title %> (<%= result.release_date %>)</a></li>
       <% elsif result.is_a? Actor %>
         <li><a href="<%= actor_path(result) %>"><%= result.name %></a></li>
       <% elsif result.is_a? Director %>

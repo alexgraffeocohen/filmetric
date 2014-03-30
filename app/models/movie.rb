@@ -16,4 +16,25 @@ class Movie < ActiveRecord::Base
   def calculate_filmetric
     filmetric = critics_score - audience_score
   end
+
+  def actor_names=(actor_names)
+    actor_names.each do |name|
+      actor = Actor.find_or_create_by(name: name)
+      self.actor_movies.build(actor: actor)
+    end
+  end
+
+  def director_names=(director_names)
+    director_names.each do |name|
+      director = Director.find_or_create_by(name: name)
+      self.director_movies.build(director: director)
+    end
+  end
+
+  def genre_names=(genre_names)
+    genre_names.each do |name|
+      genre = Genre.find_or_create_by(name: name)
+      self.genre_movies.build(genre: genre)
+    end
+  end
 end

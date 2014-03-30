@@ -33,7 +33,7 @@ describe 'executing a movie search' do
       expect(page).to have_content("Gravity")
     end
   end
-end
+end 
 
 describe 'executing an actor search' do
   before do
