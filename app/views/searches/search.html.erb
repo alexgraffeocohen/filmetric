@@ -43,6 +43,7 @@
         <% ghostbusters = Movie.find_by(title: "Ghostbusters") %>
         <% movies = [her, gravity, children, die, avatar, ghostbusters] %>
         <% i = 0 %>
+        
         <% movies.each do |movie| %>
           <a href="<%= movie_path(movie) %>"><img id="poster-thumbnail" src="<%= movie.poster_link %>"
           style="left: <%= 17 + i %>px;"></a>

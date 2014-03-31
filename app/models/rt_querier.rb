@@ -8,27 +8,36 @@ class RTQuerier
   end
 
   def self.find_by_title(title)
-    RottenMovie.find(:title => title)
+    result = RottenMovie.find(:title => title)
+    if result.is_a? Array
+      result.map do |movie|
+        self.find_by_imdb_id(movie.alternate_ids.imdb)
+      end
+    else
+      [self.find_by_imdb_id(result.alternate_ids.imdb)]
+    end
   end
 
-  def self.save_to_db(m)
-    attributes = {
-      :id => m.alternate_ids["imdb"],
-      :title => m.title,
-      :release_date => m.release_dates.theater,
-      :critics_score => m.ratings.critics_score, 
-      :audience_score => m.ratings.audience_score,
-      :critics_consensus => m.critics_consensus,
-      :genre_names => m.genres,
-      :director_names => RTQuerier.parse_director_names(m.abridged_directors),
-      :actor_names => RTQuerier.parse_actor_names(m.abridged_cast),
-      :poster_link => m.posters["original"],
-      :rating => m.mpaa_rating,
-      :rt_link => m.links["alternate"]
-    }
+  def self.save_to_db(movie_list)
+    movie_list.each do |m|
+      attributes = {
+        :id => m.alternate_ids["imdb"],
+        :title => m.title,
+        :release_date => m.release_dates.theater,
+        :critics_score => m.ratings.critics_score, 
+        :audience_score => m.ratings.audience_score,
+        :filmetric => m.ratings.critics_score - m.ratings.audience_score,
+        :critics_consensus => m.critics_consensus,
+        :genre_names => m.genres,
+        :director_names => RTQuerier.parse_director_names(m.abridged_directors),
+        :actor_names => RTQuerier.parse_actor_names(m.abridged_cast),
+        :poster_link => m.posters["original"],
+        :rating => m.mpaa_rating,
+        :rt_link => m.links["alternate"]
+      }
 
-    Movie.create(attributes)
-    puts "Stored #{m.title}"
+      Movie.create(attributes)
+    end
   end
 
   def self.parse_director_names(directors)
