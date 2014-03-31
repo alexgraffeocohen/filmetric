@@ -83,7 +83,6 @@ describe 'searching' do
   describe 'executing a movie search' do 
     context 'on the search page' do
       before do
-        binding.pry  
         visit search_path
       end
 
