@@ -30,4 +30,10 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+
+  task :source_rvm, roles: :app do
+    run "#{try_sduo} source /home/alex/.rvm/scripts/rvm && rvm reload"
+  end
 end
+
+before "deploy:start", "deploy:source_rvm"

@@ -17,7 +17,7 @@ module MoviesHelper
     average = (movie.critics_score + movie.audience_score)/2
 
     if average > 88
-      quality_response= "It’s amazing, "
+      quality_response = "It’s amazing, "
     elsif average > 75
       quality_response = "It’s damn good, "
     elsif average.between?(50,75)
