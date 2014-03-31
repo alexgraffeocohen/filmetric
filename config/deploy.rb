@@ -36,4 +36,4 @@ namespace :deploy do
   end
 end
 
-before "deploy:update", "deploy:source_rvm"
+# before "deploy:update", "deploy:source_rvm"
