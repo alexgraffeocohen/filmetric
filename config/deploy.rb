@@ -32,8 +32,8 @@ namespace :deploy do
   end
 
   task :source_rvm, roles: :app do
-    run "#{try_sudo} source /home/alex/.rvm/scripts/rvm && rvm reload"
+    run "source /home/alex/.rvm/scripts/rvm && rvm reload"
   end
 end
 
-before "deploy:restart", "deploy:source_rvm"
+before "deploy:update", "deploy:source_rvm"
