@@ -37,6 +37,6 @@ namespace :deploy do
   # end
 end
 
-set :rvm_ruby_string, 2.0.0
+set :rvm_ruby_string, '2.0.0'
 before 'deploy:setup', 'rvm:install_rvm'
 before 'deploy:setup', 'rvm:install_ruby'
