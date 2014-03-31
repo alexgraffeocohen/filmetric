@@ -1,4 +1,5 @@
 require 'bundler/capistrano'
+require "rvm/capistrano"
 
 set :application, "filmetric"
 set :repository,  "git@github.com:alexwilkinson/filmetric_rails.git"
@@ -31,9 +32,11 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  task :source_rvm, roles: :app do
-    run "source /home/alex/.rvm/scripts/rvm && rvm reload"
-  end
+  # task :source_rvm, roles: :app do
+  #   run "source /home/alex/.rvm/scripts/rvm && rvm reload"
+  # end
 end
 
-# before "deploy:update", "deploy:source_rvm"
+set :rvm_ruby_string, :local
+before 'deploy:setup', 'rvm:install_rvm'
+before 'deploy:setup', 'rvm:install_ruby'
