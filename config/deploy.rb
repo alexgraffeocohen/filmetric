@@ -32,7 +32,7 @@ namespace :deploy do
   end
 
   task :source_rvm, roles: :app do
-    run "#{try_sduo} source /home/alex/.rvm/scripts/rvm && rvm reload"
+    run "#{try_sudo} source /home/alex/.rvm/scripts/rvm && rvm reload"
   end
 end
 
