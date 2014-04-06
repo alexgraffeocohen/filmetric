@@ -6,15 +6,32 @@ class Movie < ActiveRecord::Base
   has_many :actors, :through => :actor_movies
   has_many :directors, :through => :director_movies
 
-  def Movie.generate_filmetrics
-    Movie.all.each do |movie|
-      movie.filmetric = (movie.critics_score - movie.audience_score)
-      movie.save
-    end
-  end
+  def self.remove_movie(movie)
+    movie.actors.each do |actor|
+      relation = ActorMovie.find_by(actor: actor, movie: movie)
+      relation.destroy
+      actor.destroy if actor.movies.empty?
 
-  def calculate_filmetric
-    filmetric = critics_score - audience_score
+      Actor.recalculate_filmetric_for(actor) unless actor.movies.empty?
+    end
+
+    movie.genres.each do |genre|
+      relation = GenreMovie.find_by(genre: genre, movie: movie)
+      relation.destroy
+      genre.destroy if genre.movies.empty?
+      
+      Genre.recalculate_filmetric_for(genre) unless genre.movies.empty?
+    end
+
+    movie.directors.each do |director|
+      relation = DirectorMovie.find_by(director: director, movie: movie)
+      relation.destroy 
+      director.destroy if director.movies.empty?
+      
+      Director.recalculate_filmetric_for(director) unless director.movies.empty?
+    end
+
+    movie.destroy
   end
 
   def actor_names=(actor_names)

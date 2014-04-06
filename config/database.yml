@@ -3,7 +3,7 @@ development:
   adapter: postgresql
   database: filmetric_development
   pool: 5
-  username: alex
+  username: Alex
   password:
 
 # Warning: The database defined as "test" will be erased and
@@ -13,7 +13,7 @@ test:
   adapter: postgresql
   database: filmetric_test
   pool: 5
-  username: alex
+  username: Alex
   password:
 
 production:
@@ -22,7 +22,7 @@ production:
   encoding: utf8
   database: filmetric_rails
   username: app
-  password: JflfhGjDz29Uxo3AKzc5
+  password: hF3rthksj
   host: localhost
   port: 5432
   pool: 10
