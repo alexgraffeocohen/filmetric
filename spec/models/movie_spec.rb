@@ -54,7 +54,7 @@ describe Movie do
     ty.movies << gravity << her
     action.movies << gravity << her
     
-    Movie.remove_movie(peabody)
+    peabody.destroy
     rob.reload
     ty.reload
     action.reload

@@ -5,4 +5,6 @@ class Actor < ActiveRecord::Base
   include ApplicationHelper
 
   before_save :calculate_filmetric
+
+  
 end
