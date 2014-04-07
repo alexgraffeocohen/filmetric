@@ -30,6 +30,10 @@ class SearchesController < ApplicationController
       case params[:category]
       when "Movie"
         queried_result = RTQuerier.find_by_title(query)
+        if queried_result.empty?
+          flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
+          render "search"
+        end
         RTQuerier.save_to_db(queried_result)
         @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
         redirect_to movie_path(@results.first) if @results.count == 1
