@@ -37,6 +37,7 @@ class RTQuerier
       }
 
       Movie.create(attributes)
+       
     end
   end
 

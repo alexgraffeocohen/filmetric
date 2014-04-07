@@ -44,5 +44,4 @@ describe RTQuerier do
     unrated_id = '986264'
     expect{RTQuerier.new([unrated_id]).query}.to_not change{Movie.count}.by(1)
   end
-
 end

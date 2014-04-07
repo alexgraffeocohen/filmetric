@@ -9,4 +9,12 @@ module ApplicationHelper
     end
   end
 
+  def calculate_filmetric
+    total = 0
+    movies.each do |movie|
+      total += (movie.critics_score - movie.audience_score)
+    end
+    self.filmetric = (total / movies.length) unless self.movies.empty?
+  end
+
 end

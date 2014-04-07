@@ -13,4 +13,5 @@ describe SearchesController do
       get :show
       expect(response).to be_a_success
     end
+  end
 end 

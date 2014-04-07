@@ -51,12 +51,9 @@ describe Movie do
     action = Genre.find_by(name: "Action & Adventure")
 
     rob.movies << gravity << her
-    Director.recalculate_filmetric_for(rob)
     ty.movies << gravity << her
-    Actor.recalculate_filmetric_for(ty)
     action.movies << gravity << her
-    Genre.recalculate_filmetric_for(action)
-
+    
     Movie.remove_movie(peabody)
     rob.reload
     ty.reload
