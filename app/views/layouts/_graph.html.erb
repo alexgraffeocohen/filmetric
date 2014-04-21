@@ -1,0 +1,7 @@
+<% data = [].tap do |data| %>
+  <% resource.movies.map do |movie| %> 
+    <% data << [movie.release_date, movie.filmetric] %>
+  <% end %>
+<% end %>
+
+<%= line_chart data, library: { tooltip: { trigger: 'none' }, title: "Movies by Filmetric" } %>

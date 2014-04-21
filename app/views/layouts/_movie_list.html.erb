@@ -1,0 +1,10 @@
+<% @movies.each do |movie| %>
+  <% @average = ((movie.critics_score + movie.audience_score) / 2) %>
+  <% if @average >= 75 %>
+    <li><a class="good" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
+  <% elsif @average.between?(50,75) %>
+    <li><a class="ok" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
+  <% elsif @average < 50 %>
+    <li><a class="bad" href="<%= movie_path(movie.id) %>"><%= movie.title %> (<%= movie.release_year %>)</a></li>
+  <% end %>
+<% end %>

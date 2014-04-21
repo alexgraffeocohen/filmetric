@@ -61,6 +61,10 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def release_year
+    self.release_date.strftime("%Y") unless self.release_date.nil?
+  end
+
   def self.replace_release_years
     Movie.all.each do |movie|
       begin
