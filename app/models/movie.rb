@@ -60,4 +60,17 @@ class Movie < ActiveRecord::Base
       self.genre_movies.build(genre: genre)
     end
   end
+
+  def self.replace_release_years
+    Movie.all.each do |movie|
+      begin
+        fetched_movie = RTQuerier.find_by_imdb_id(movie.id)
+        movie.update(release_date: fetched_movie.release_dates.theater)
+        puts "Updated #{movie.title} with #{movie.release_date}"
+      rescue
+        next
+      end
+    sleep 1
+    end
+  end
 end

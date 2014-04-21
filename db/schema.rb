@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330184352) do
+ActiveRecord::Schema.define(version: 20140421013306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140330184352) do
 
   create_table "movies", force: true do |t|
     t.text    "title"
-    t.text    "release_date"
+    t.date    "release_date"
     t.integer "critics_score"
     t.integer "audience_score"
     t.text    "critics_consensus"

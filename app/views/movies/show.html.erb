@@ -10,7 +10,7 @@
     <div id="item-data">
       <h2>Info</h2>
       <p>
-        Release Date: <%= @movie.release_date %><br>
+        Release Date: <%= @release %><br>
         Rating: <%= @movie.rating %><br>
         Directed By: <a href="<%= director_path(@movie.directors.first) %>">
           <%= @movie.directors.first.name %></a>

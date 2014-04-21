@@ -35,7 +35,7 @@
       
       <% @data = [].tap do |data| %>
         <% @actor.movies.map do |movie| %> 
-          <% data << [Time.new(movie.release_date), movie.filmetric] %>
+          <% data << [movie.release_date, movie.filmetric] %>
         <% end %>
       <% end %>
 
