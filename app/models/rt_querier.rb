@@ -10,16 +10,21 @@ class RTQuerier
   def self.find_by_title(title)
     result = RottenMovie.find(:title => title)
     if result.is_a? Array
-      result.map do |movie|
-        self.find_by_imdb_id(movie.alternate_ids.imdb)
-      end
+      result.map { |movie|
+        begin
+          self.find_by_imdb_id(movie.alternate_ids.imdb)
+        rescue
+          next
+        end
+      }.compact
     else
-      [self.find_by_imdb_id(result.alternate_ids.imdb)]
+      [self.find_by_imdb_id(result.alternate_ids.imdb)] unless result.alternate_ids.nil?
     end
   end
 
   def self.save_to_db(movie_list)
     movie_list.each do |m|
+      next if m.title.nil? || m.ratings.critics_score == -1
       attributes = {
         :id => m.alternate_ids["imdb"],
         :title => m.title,
@@ -28,16 +33,18 @@ class RTQuerier
         :audience_score => m.ratings.audience_score,
         :filmetric => m.ratings.critics_score - m.ratings.audience_score,
         :critics_consensus => m.critics_consensus,
-        :genre_names => m.genres,
-        :director_names => RTQuerier.parse_director_names(m.abridged_directors),
-        :actor_names => RTQuerier.parse_actor_names(m.abridged_cast),
         :poster_link => m.posters["original"],
         :rating => m.mpaa_rating,
         :rt_link => m.links["alternate"]
       }
 
-      Movie.create(attributes)
-       
+      unless Movie.find_by(id: attributes[:id])
+        movie = Movie.create(attributes)
+        movie.genre_names = m.genres
+        movie.director_names = RTQuerier.parse_director_names(m.abridged_directors)
+        movie.actor_names =  RTQuerier.parse_actor_names(m.abridged_cast)
+        movie.save
+      end
     end
   end
 
@@ -69,7 +76,7 @@ class RTQuerier
       begin
         next if !Movie.find(e).nil?
         movie = self.class.find_movie_by_imdb(e)
-        next if movie.title.nil? || m.ratings.critics_score != -1
+        next if movie.title.nil? || m.ratings.critics_score == -1
         make_movie_instance(movie)
         sleep 1
       rescue

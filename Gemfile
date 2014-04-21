@@ -43,6 +43,9 @@ end
 group :development, :test do
   gem 'quiet_assets'
   gem 'pry'
+  gem "better_errors"
+  gem "sprockets_better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do
