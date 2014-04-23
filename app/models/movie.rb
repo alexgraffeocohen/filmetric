@@ -74,7 +74,7 @@ class Movie < ActiveRecord::Base
       rescue
         next
       end
-    sleep 1
+    sleep 0.25
     end
   end
 end
