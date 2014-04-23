@@ -27,13 +27,13 @@ module MoviesHelper
     end
 
     filmetric_responses = {
-    (16..25) => "and the audience is not as down!",
-    (9..15) => "and the critics are freaking delighted!",
-    (4..8) => "and the critics are happy campers!",
-    (-3..3) => "and everyone is in too much goddamn agreement!",
-    (-8..-4) => "and audiences are pleased as punch!",
-    (-15..-9) => "and audiences can’t get enough!",
-    (-30..-15) => "and critics are not as down!",
+    (16..25) => "and critics liked it a lot more!",
+    (9..15) => "and critics liked it more.",
+    (4..8) => "and critics liked it a litte more.",
+    (-3..3) => "and everyone agrees.",
+    (-8..-4) => "and audiences liked it a little more.",
+    (-15..-9) => "and audiences liked it more.",
+    (-30..-15) => "and critics liked it a lot more!",
     }
 
     if movie.filmetric > 25

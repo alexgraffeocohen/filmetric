@@ -5,7 +5,7 @@ class SearchesController < ApplicationController
 
   def show
     if params[:q].empty?
-      flash.now[:notice] = "You gotta give me something! : )"
+      flash.now[:notice] = "You gotta give me something!"
       render "search"
     end
 
