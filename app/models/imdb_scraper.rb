@@ -1,4 +1,4 @@
-require_relative '../../config/environment'
+require 'open-uri'
 
 class IMDBScraper
   attr_accessor :ids, :counter, :base_url, :pages_to_scrape

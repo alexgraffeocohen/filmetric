@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Movie do
+  let(:rob) { Director.create(name: "Rob Minkoff") }
+  let(:michael) { Director.create(name: "Michael Bay") }
+  let(:ty)  { Actor.create(name: "Ty Burrell") }
+  let(:max)  { Actor.create(name: "Max Charles") }
+  let(:action) { Genre.create(name: "Action & Adventure") }
+  let(:animation) { Genre.create(name: "Animation") }
+
   let(:her) {
     Movie.create(
                    :id => 1798709,
@@ -30,46 +37,69 @@ describe Movie do
     )
   }
 
-  it 'can remove a movie and update associated records' do
-    peabody = Movie.create(
-      :id => 864835,
-      :title => "Mr. Peabody & Sherman",
-      :release_date => "2014-03-07",
-      :critics_score => 79,
-      :audience_score => 79,
-      :critics_consensus => "Mr. Peabody & Sherman offers a surprisingly entertaining burst of colorful all-ages fun, despite of its dated source material and rather convoluted plot.",
-      :poster_link => "http://content9.flixster.com/movie/11/17/57/11175779_ori.jpg",
-      :rating => "PG",
-      :rt_link => "http://www.rottentomatoes.com/m/mr_peabody_and_sherman/",
-      :filmetric => 0,
-      :director_names => ["Rob Minkoff", "Michael Bay"],
-      :actor_names => ["Ty Burrell", "Max Charles", "Stephen Colbert", "Allison Janney", "Ariel Winter"],
-      :genre_names => ["Action & Adventure", "Animation", "Kids & Family", "Comedy"]
-    )
-    rob = Director.find_by(name: "Rob Minkoff")
-    ty = Actor.find_by(name: "Ty Burrell")
-    action = Genre.find_by(name: "Action & Adventure")
+  describe 'deleting a movie' do
+    before(:each) do
+      rob.movies << gravity << her
+      rob.save
+      ty.movies << gravity << her
+      ty.save
+      action.movies << gravity << her
+      action.save
 
-    rob.movies << gravity << her
-    ty.movies << gravity << her
-    action.movies << gravity << her
+      peabody = Movie.new(
+        :id => 864835,
+        :title => "Mr. Peabody & Sherman",
+        :release_date => "2014-03-07",
+        :critics_score => 79,
+        :audience_score => 79,
+        :critics_consensus => "Mr. Peabody & Sherman offers a surprisingly entertaining burst of colorful all-ages fun, despite of its dated source material and rather convoluted plot.",
+        :poster_link => "http://content9.flixster.com/movie/11/17/57/11175779_ori.jpg",
+        :rating => "PG",
+        :rt_link => "http://www.rottentomatoes.com/m/mr_peabody_and_sherman/",
+        :filmetric => 0,
+      )
+
+      peabody.assign(["Rob Minkoff", "Michael Bay"], "director")
+      peabody.assign(["Ty Burrell", "Max Charles"], "actor")
+      peabody.assign(["Action & Adventure", "Animation"], "genre")
+      peabody.save
+
+      peabody.destroy
+      rob.reload
+      ty.reload
+      action.reload
+    end
+
+
+    it 'can remove a movie' do 
+      expect{Movie.find('864835')}.to raise_error
+    end
+
+    it 'can remove movie from actors and update their filmetrics' do
+      expect(ty.movies.count).to eq(2)
+      expect(ty.filmetric).to eq(11)
+    end
+
+    it 'can remove movie from directors and update filmetrics' do
+      expect(rob.movies.count).to eq(2)
+      expect(rob.filmetric).to eq(11)
+    end
+
+    it 'can remove movie from genres and update filmetrics' do
+      expect(action.movies.count).to eq(2)
+      expect(action.filmetric).to eq(11)
+    end
+
+    it 'can delete a director when he/she no longer has movies after deletion' do
+      expect(Director.find_by(name: "Michael Bay")).to eq(nil)
+    end
+
+    it 'can delete an actor when he/she no longer has movies after deletion' do
+      expect(Actor.find_by(name: "Max Charles")).to eq(nil)
+    end
     
-    peabody.destroy
-    rob.reload
-    ty.reload
-    action.reload
-
-    expect{Movie.find('864835')}.to raise_error
-
-    expect(rob.movies.count).to eq(2)
-    expect(rob.filmetric).to eq(11)
-    expect(ty.movies.count).to eq(2)
-    expect(ty.filmetric).to eq(11)
-    expect(action.movies.count).to eq(2)
-    expect(action.filmetric).to eq(11)
-
-    expect(Director.find_by(name: "Michael Bay")).to eq(nil)
-    expect(Actor.find_by(name: "Max Charles")).to eq(nil)
-    expect(Genre.find_by(name: "Animation")).to eq(nil)
+    it 'can delete a genre when it no longer has movies after deletion' do
+      expect(Genre.find_by(name: "Animation")).to eq(nil)
+    end
   end
 end
