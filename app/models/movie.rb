@@ -9,36 +9,19 @@ class Movie < ActiveRecord::Base
   before_destroy :break_ties
 
   def break_ties
-    self.actors.each do |actor|
-      relation = ActorMovie.find_by(actor: actor, movie: self)
-      relation.destroy
-      actor.destroy if actor.movies.empty?
-      actor.save
-    end
-
-    self.genres.each do |genre|
-      relation = GenreMovie.find_by(genre: genre, movie: self)
-      relation.destroy
-      genre.destroy if genre.movies.empty?
-      genre.save
-    end
-
-    self.directors.each do |director|
-      relation = DirectorMovie.find_by(director: director, movie: self)
-      relation.destroy 
-      director.destroy if director.movies.empty?
-      director.save
-    end
+    remove_ties_with("actors")
+    remove_ties_with("genres")
+    remove_ties_with("directors")
   end
 
-  # def self.remove_tie_between(staff, movie)
-  #   movie.staff.each do |staff|
-  #     relation = ActorMovie.find_by(actor: actor, movie: movie)
-  #     relation.destroy
-  #     actor.destroy if actor.movies.empty?
-  #     actor.save
-  #   end
-  # end
+  def remove_ties_with(units)
+   self.send(units).each do |unit|
+      relation = "#{unit.class}Movie".constantize.find_by("#{unit.class}".downcase.to_sym => unit, movie: self)
+      relation.destroy
+      unit.destroy if unit.movies.empty?
+      unit.save
+    end
+  end
 
   def actor_names=(actor_names)
     actor_names.each do |name|
