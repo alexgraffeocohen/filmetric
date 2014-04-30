@@ -25,44 +25,14 @@ class RTQuerier
   def self.save_to_db(movie_list)
     movie_list.each do |m|
       next if m.title.nil? || m.ratings.critics_score == -1
-      attributes = {
-        :id => m.alternate_ids["imdb"],
-        :title => m.title,
-        :release_date => m.release_dates.theater,
-        :critics_score => m.ratings.critics_score, 
-        :audience_score => m.ratings.audience_score,
-        :filmetric => m.ratings.critics_score - m.ratings.audience_score,
-        :critics_consensus => m.critics_consensus,
-        :poster_link => m.posters["original"],
-        :rating => m.mpaa_rating,
-        :rt_link => m.links["alternate"]
-      }
-
+      attributes = attributes_from_rt(m)
+      director_names = RTQuerier.parse_director_names(m.abridged_directors)
+      actor_names = RTQuerier.parse_actor_names(m.abridged_cast)
+      genre_names = m.genres
       unless Movie.find_by(id: attributes[:id])
         movie = Movie.new(attributes)
-        movie.assign(RTQuerier.parse_director_names(m.abridged_directors), "director")
-        movie.assign(RTQuerier.parse_actor_names(m.abridged_cast), "actor")
-        movie.assign(m.genres, "genre")
-        movie.save
+        self.assign_data_for(movie, director_names, actor_names, genre_names)
       end
-    end
-  end
-
-  def self.parse_director_names(directors)
-    directors.map do |director|
-      director.name
-    end
-  end
-
-  def self.parse_actor_names(actors)
-    actors.map do |actor|
-      actor.name
-    end
-  end
-
-  def self.parse_director_names(directors)
-    directors.map do |director|
-      director.name
     end
   end
 
@@ -82,5 +52,47 @@ class RTQuerier
         next
       end
     end 
+  end
+
+  private
+
+  def self.parse_director_names(directors)
+    directors.map do |director|
+      director.name
+    end
+  end
+
+  def self.parse_actor_names(actors)
+    actors.map do |actor|
+      actor.name
+    end
+  end
+
+  def self.parse_director_names(directors)
+    directors.map do |director|
+      director.name
+    end
+  end
+
+  def self.attributes_from_rt(m)
+    {
+      :id => m.alternate_ids["imdb"],
+      :title => m.title,
+      :release_date => m.release_dates.theater,
+      :critics_score => m.ratings.critics_score, 
+      :audience_score => m.ratings.audience_score,
+      :filmetric => m.ratings.critics_score - m.ratings.audience_score,
+      :critics_consensus => m.critics_consensus,
+      :poster_link => m.posters["original"],
+      :rating => m.mpaa_rating,
+      :rt_link => m.links["alternate"]
+    }
+  end
+
+  def self.assign_data_for(movie, director_names, actor_names, genre_names)
+    movie.assign(director_names, "director")
+    movie.assign(actor_names, "actor")
+    movie.assign(genre_names, "genre")
+    movie.save
   end
 end
