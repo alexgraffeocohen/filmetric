@@ -23,24 +23,10 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def actor_names=(actor_names)
-    actor_names.each do |name|
-      actor = Actor.find_or_create_by(name: name)
-      self.actor_movies.build(actor: actor)
-    end
-  end
-
-  def director_names=(director_names)
-    director_names.each do |name|
-      director = Director.find_or_create_by(name: name)
-      self.director_movies.build(director: director)
-    end
-  end
-
-  def genre_names=(genre_names)
-    genre_names.each do |name|
-      genre = Genre.find_or_create_by(name: name)
-      self.genre_movies.build(genre: genre)
+  def assign(names, category)
+    names.each do |name|
+      object = category.capitalize.constantize.find_or_create_by(name: name)
+      self.send("#{category}_movies").build("#{category}".to_sym => object)
     end
   end
 

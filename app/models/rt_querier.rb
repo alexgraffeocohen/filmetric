@@ -4,7 +4,7 @@ class RTQuerier
   Rotten.api_key = ENV["RT_KEY"]
 
   def self.find_by_imdb_id(imdb_id)
-    RottenMovie.find(:imdb => imdb_id)
+    [RottenMovie.find(:imdb => imdb_id)]
   end
 
   def self.find_by_title(title)
@@ -16,7 +16,7 @@ class RTQuerier
         rescue
           next
         end
-      }.compact
+      }.compact.flatten(1)
     else
       [self.find_by_imdb_id(result.alternate_ids.imdb)] unless result.alternate_ids.nil?
     end
@@ -39,10 +39,10 @@ class RTQuerier
       }
 
       unless Movie.find_by(id: attributes[:id])
-        movie = Movie.create(attributes)
-        movie.genre_names = m.genres
-        movie.director_names = RTQuerier.parse_director_names(m.abridged_directors)
-        movie.actor_names =  RTQuerier.parse_actor_names(m.abridged_cast)
+        movie = Movie.new(attributes)
+        movie.assign(RTQuerier.parse_director_names(m.abridged_directors), "director")
+        movie.assign(RTQuerier.parse_actor_names(m.abridged_cast), "actor")
+        movie.assign(m.genres, "genre")
         movie.save
       end
     end
@@ -75,14 +75,12 @@ class RTQuerier
     data.each do |e|
       begin
         next if !Movie.find(e).nil?
-        movie = self.class.find_movie_by_imdb(e)
-        next if movie.title.nil? || m.ratings.critics_score == -1
-        make_movie_instance(movie)
-        sleep 1
+        movie = self.class.find_movie_by_imdb_id(e)
+        self.class.save_to_db([movie])
+        sleep 0.25
       rescue
         next
       end
     end 
   end
-
 end

@@ -10,7 +10,7 @@ describe RTQuerier do
   end
 
   it 'can find a movie by imdb id' do
-    movie = RTQuerier.find_by_imdb_id('0892769')
+    movie = RTQuerier.find_by_imdb_id('0892769').first
     expect(movie.title).to_not eq(nil)
   end
 
