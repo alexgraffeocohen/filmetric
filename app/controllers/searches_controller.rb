@@ -11,20 +11,7 @@ class SearchesController < ApplicationController
 
     query = params[:q].split.collect(&:downcase).join(" ")
 
-    case params[:category]
-    when "Movie"
-      @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
-      redirect_to movie_path(@results.first) if @results.count == 1
-    when "Actor"
-      @results = Actor.where('lower(name) LIKE ?', "%#{query}%")
-      redirect_to actor_path(@results.first) if @results.count == 1
-    when "Director"
-      @results = Director.where('lower(name) LIKE ?', "%#{query}%")
-      redirect_to director_path(@results.first) if @results.count == 1
-    when "Genre"
-      @results = Genre.where('lower(name) LIKE ?', "%#{query}%")
-      redirect_to genre_path(@results.first) if @results.count == 1
-    end
+    check_for_query_category(params[:category], query)
     
     if @results.empty?
       case params[:category]
@@ -41,6 +28,25 @@ class SearchesController < ApplicationController
       end
       flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
       render "search" 
+    end
+  end
+
+  private
+
+  def check_for_query_category(category, query)
+    case category
+    when "Movie"
+      @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
+      redirect_to movie_path(@results.first) if @results.count == 1
+    when "Actor"
+      @results = Actor.where('lower(name) LIKE ?', "%#{query}%")
+      redirect_to actor_path(@results.first) if @results.count == 1
+    when "Director"
+      @results = Director.where('lower(name) LIKE ?', "%#{query}%")
+      redirect_to director_path(@results.first) if @results.count == 1
+    when "Genre"
+      @results = Genre.where('lower(name) LIKE ?', "%#{query}%")
+      redirect_to genre_path(@results.first) if @results.count == 1
     end
   end
 
