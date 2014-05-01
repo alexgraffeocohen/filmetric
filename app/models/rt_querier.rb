@@ -56,12 +56,6 @@ class RTQuerier
 
   private
 
-  def self.parse_director_names(directors)
-    directors.map do |director|
-      director.name
-    end
-  end
-
   def self.parse_actor_names(actors)
     actors.map do |actor|
       actor.name
