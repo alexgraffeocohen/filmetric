@@ -46,6 +46,8 @@ group :development, :test do
   gem "better_errors"
   gem "sprockets_better_errors"
   gem "binding_of_caller"
+  gem "factory_girl_rails"
+  gem "faker"
 end
 
 group :test do

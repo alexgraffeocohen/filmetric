@@ -1,14 +1,15 @@
 require 'spec_helper'
 
-describe MoviesController do
+describe DirectorsController do
   before(:each) do
-    @movie = create(:movie)
+    @director = create(:director)
   end
 
   describe "GET #show" do
     it "responds with a 200 status" do
-      get :show, id: @movie.id
+      get :show, id: @director.id
       expect(response).to be_a_success
     end
   end
+
 end
