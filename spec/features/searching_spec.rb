@@ -15,7 +15,7 @@ feature 'Search' do
             :filmetric => 9
     )
 
-    Movie.create(
+    gravity = Movie.create(
                    :id => 1454468,
                 :title => "Gravity",
          :release_date => "Fri, 04 Oct 2013",
@@ -84,12 +84,12 @@ feature 'Search' do
             :filmetric => 9
       )
     
-    Actor.create(name: "Brad Pitt", filmetric: -5)
-    Director.create(name: "Michael Bay", filmetric: -28)
-    Genre.create(name: "Action", filmetric: -5)
+    DirectorMovie.create(director: Director.create(name: "Alfonso Cuaron"), movie: gravity)
+    ActorMovie.create(actor: Actor.create(name: "Sandra Bullock"), movie: gravity)
+    GenreMovie.create(genre: Genre.create(name: "Action", filmetric: -5), movie: gravity)
   end
 
-  scenario 'executing a movie search' do   
+  scenario 'searching for movie that is in database' do   
     visit search_path
     select('Movie', :from => 'category')
     fill_in 'q', with: 'Gravity'
@@ -108,7 +108,7 @@ feature 'Search' do
     expect(page).to have_content("Die Hard 3: With a Vengeance")
   end
 
-  scenario 'querying for movie not in database' do
+  scenario 'searching for movie that is not in database but in RT' do
     visit search_path
     select('Movie', :from => 'category')
     fill_in 'q', with: 'The Iron Giant'
@@ -116,34 +116,93 @@ feature 'Search' do
 
     expect(page).to have_content("The Iron Giant")
   end 
+
+  scenario 'searching for movie that cannot be found' do
+    visit search_path
+    select('Movie', :from => 'category')
+    fill_in 'q', with: 'Plum Sugar Princess'
+    click_button('Search')
+
+    expect(page).to have_content("I'm sorry, nothing matched what you were looking for")
+  end
    
-  scenario 'searching for an actor in database' do
+  scenario 'searching for actor that is in database' do
     visit search_path
     select('Actor', :from => 'category')
-    fill_in 'q', with: 'Brad'
+    fill_in 'q', with: 'Sandra'
     click_button('Search')
 
-    expect(page).to have_content("Brad Pitt")
+    expect(page).to have_content("Sandra Bullock")
   end
-    
 
-  scenario 'searching for a director in database' do
+  scenario 'searching for actor returns multiple results' do
+    Actor.create(name: "Robert Duval", filmetric: 5)
+    Actor.create(name: "Robert Redford", filmetric: 7)
+
+    visit search_path
+    select('Actor', :from => 'category')
+    fill_in 'q', with: 'Robert'
+    click_button('Search')
+
+    expect(page).to have_content("Robert Duval")
+    expect(page).to have_content("Robert Redford")
+  end
+
+  scenario 'searching for actor that cannot be found' do
+    visit search_path
+    select('Actor', :from => 'category')
+    fill_in 'q', with: 'Daniel Day Lewis'
+    click_button('Search')
+
+    expect(page).to have_content("I'm sorry, nothing matched what you were looking for")
+  end
+
+  scenario 'searching for director that is in database' do
     visit search_path
     select('Director', :from => 'category')
-    fill_in 'q', with: 'Michael Bay'
+    fill_in 'q', with: 'Alfonso Cuaron'
     click_button('Search')
 
-    expect(page).to have_content("Michael Bay")
+    expect(page).to have_content("Alfonso Cuaron")
   end
-   
 
-  scenario 'searching for a genre in database' do
+  scenario 'searching for director that returns multiple results' do
+    Director.create(name: "Carlos Cuaron", filmetric: -28)
+
+    visit search_path
+    select('Director', :from => 'category')
+    fill_in 'q', with: 'Cuaron'
+    click_button('Search')
+
+    expect(page).to have_content("Carlos Cuaron")
+    expect(page).to have_content("Alfonso Cuaron")
+  end
+
+  scenario 'searching for director that cannot be found' do
+    visit search_path
+    select('Director', :from => 'category')
+    fill_in 'q', with: 'Katherine Bigelow'
+    click_button('Search')
+
+    expect(page).to have_content("I'm sorry, nothing matched what you were looking for")
+  end
+
+  scenario 'searching for genre that is in database' do
     visit search_path
     select('Genre', :from => 'category')
     fill_in 'q', with: 'Action'
     click_button('Search')
 
     expect(page).to have_content("Action")
+  end
+
+  scenario 'searching for genre that cannot be found' do
+    visit search_path
+    select('Genre', :from => 'category')
+    fill_in 'q', with: 'Lollipops'
+    click_button('Search')
+
+    expect(page).to have_content("I'm sorry, nothing matched what you were looking for")
   end
 end
    

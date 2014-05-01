@@ -18,7 +18,7 @@ class RTQuerier
         end
       }.compact.flatten(1)
     else
-      [self.find_by_imdb_id(result.alternate_ids.imdb)] unless result.alternate_ids.nil?
+      [self.find_by_imdb_id(result.alternate_ids.imdb)].flatten(1) unless result.alternate_ids.nil?
     end
   end
 
