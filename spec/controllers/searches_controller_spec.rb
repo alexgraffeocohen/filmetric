@@ -27,9 +27,29 @@ describe SearchesController do
       expect(response).to be_a_success
     end
 
-    it 'redirects to movie when one result' do
+    it 'redirects to movie when there is one result' do
       get :show, { q: @movie.title, category: 'Movie' }
       expect(response).to be_a_redirect
+    end
+
+    it 'redirects to movie when found on RT' do
+      get :show, { q: 'the iron giant', category: 'Movie' }
+      expect(response).to be_a_redirect
+    end
+
+    it 're-renders search view when there is a bad result from RT' do
+      get :show, { q: 'like stars on earth', category: 'Movie' }
+      expect(response).to render_template('searches/search')
+    end
+
+    it 're-renders search view when nothing is provided for search' do
+      get :show, { q: '', category: 'Movie' }
+      expect(response).to render_template('searches/search')
+    end
+
+    it 're-renders search view when query isn\'t found' do
+      get :show, {q: 'sugar plum princess', category: 'Movie' }
+      expect(response).to render_template('searches/search')
     end
 
     it 'processes actor search with multiple results' do

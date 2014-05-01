@@ -45,13 +45,12 @@ class SearchesController < ApplicationController
   end
   
   def save_and_display(rt_result, query)
-    begin
-      RTQuerier.save_to_db(rt_result)
-      @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
-      redirect_to movie_path(@results.first) if @results.count == 1
-    rescue
+    RTQuerier.save_to_db(rt_result)
+    @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
+    if @results.empty?
       flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
-      render "search"
+      return render "search"
     end
+    redirect_to movie_path(@results.first) if @results.count == 1
   end
 end

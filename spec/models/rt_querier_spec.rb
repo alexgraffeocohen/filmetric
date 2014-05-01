@@ -36,7 +36,7 @@ describe RTQuerier do
   end
 
   it 'will not save movies already in database' do
-    Movie.create(id: '0892769')  
+    Movie.create(id: '0892769')
     expect{RTQuerier.new([ids[0]]).query}.to_not change{Movie.count}.by(1)
   end
 
