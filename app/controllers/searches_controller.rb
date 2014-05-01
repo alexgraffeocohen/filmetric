@@ -10,30 +10,33 @@ class SearchesController < ApplicationController
     end
 
     query = params[:q].split.collect(&:downcase).join(" ")
-    check_for_query_category(params[:category], query)
-    
-    if @results.empty?
-      rt_result = check_rt(params[:category], query)
-      if rt_result.empty?
-        flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
-        return render "search"
-      else
-        save_and_return(rt_result, query)
-      end 
-    end
+    handle_query(params[:category], query)
   end
 
   private
 
-  def check_for_query_category(category, query)
-    if category == "Movie" 
-      @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
-    else
-      @results = category.constantize.where('lower(name) LIKE ?', "%#{query}%")
+  def handle_query(category, query)
+    @results = check_database(category, query)
+    if @results.empty?
+      @results = check_rt(category, query)
+      if @results.empty?
+        flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
+        return render "search"
+      else
+        save_and_return(@results, query)
+      end 
     end
     redirect_to send("#{category.downcase}_path", @results.first) if @results.count == 1
   end
-  
+
+  def check_database(category, query)
+    if category == "Movie" 
+      Movie.where('lower(title) LIKE ?', "%#{query}%")
+    else
+      category.constantize.where('lower(name) LIKE ?', "%#{query}%")
+    end
+  end
+
   def check_rt(category, query)
     case category
     when "Movie"
