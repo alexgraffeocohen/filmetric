@@ -17,13 +17,13 @@ class SearchesController < ApplicationController
 
   def handle_query(category, query)
     @results = check_database(category, query)
-    if @results.empty?
+    if @results.blank?
       @results = check_rt(category, query)
-      if @results.empty?
+      if @results.blank?
         flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
         return render "search"
       else
-        save_and_return(@results, query)
+        return save_and_display(@results, query)
       end 
     end
     redirect_to send("#{category.downcase}_path", @results.first) if @results.count == 1
@@ -44,14 +44,14 @@ class SearchesController < ApplicationController
     end
   end
   
-  def save_and_return(rt_result, query)
+  def save_and_display(rt_result, query)
     begin
       RTQuerier.save_to_db(rt_result)
       @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
-      return redirect_to movie_path(@results.first) if @results.count == 1
+      redirect_to movie_path(@results.first) if @results.count == 1
     rescue
       flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
-      return render "search"
+      render "search"
     end
   end
 end
