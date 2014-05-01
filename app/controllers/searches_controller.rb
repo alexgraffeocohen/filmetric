@@ -26,22 +26,14 @@ class SearchesController < ApplicationController
   private
 
   def check_for_query_category(category, query)
-    case category
-    when "Movie"
+    if category == "Movie" 
       @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
-      redirect_to movie_path(@results.first) if @results.count == 1
-    when "Actor"
-      @results = Actor.where('lower(name) LIKE ?', "%#{query}%")
-      redirect_to actor_path(@results.first) if @results.count == 1
-    when "Director"
-      @results = Director.where('lower(name) LIKE ?', "%#{query}%")
-      redirect_to director_path(@results.first) if @results.count == 1
-    when "Genre"
-      @results = Genre.where('lower(name) LIKE ?', "%#{query}%")
-      redirect_to genre_path(@results.first) if @results.count == 1
+    else
+      @results = category.constantize.where('lower(name) LIKE ?', "%#{query}%")
     end
+    redirect_to send("#{category.downcase}_path", @results.first) if @results.count == 1
   end
-
+  
   def check_rt(category, query)
     case category
     when "Movie"
