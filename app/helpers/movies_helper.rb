@@ -24,6 +24,8 @@ module MoviesHelper
       quality_response = "It’s decent, "
     elsif average < 50
       quality_response = "It’s kind of crap, "
+    elsif average < 30
+      quality_response = "It's crap, "
     end
 
     filmetric_responses = {
