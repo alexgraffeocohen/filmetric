@@ -44,8 +44,8 @@ class RTQuerier
   def query
     data.each do |e|
       begin
-        next if !Movie.find(e).nil?
-        movie = self.class.find_movie_by_imdb_id(e)
+        next if !Movie.find_by(id: e).nil?
+        movie = self.class.find_by_imdb_id(e).first
         self.class.save_to_db([movie])
         sleep 0.25
       rescue

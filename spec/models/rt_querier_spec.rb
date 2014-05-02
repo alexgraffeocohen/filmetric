@@ -30,6 +30,10 @@ describe RTQuerier do
     expect(saved_movie.genres).to include(Genre.find_by(name: "Kids & Family"))
   end
 
+  it 'can save a movies from a list of ids' do
+    expect{querier.query}.to change{Movie.count}.by(3)
+  end
+
   it 'will not save non-matches by imdb_id to database' do
     bad_id = '9673657'
     expect{RTQuerier.new([bad_id]).query}.to_not change{Movie.count}.by(1)
