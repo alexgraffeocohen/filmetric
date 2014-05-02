@@ -3,8 +3,8 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'simplecov'
 require 'coveralls'
 
-# Coveralls.wear!('rails')
-# SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+Coveralls.wear!('rails')
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
   add_filter 'spec/'
   add_filter 'config/'
