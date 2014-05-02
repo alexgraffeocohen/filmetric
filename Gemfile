@@ -56,6 +56,7 @@ group :test do
   gem 'database_cleaner'
   gem 'awesome_print'
   gem 'simplecov'
+  gem 'rake'
 end
 
 # Use ActiveModel has_secure_password
