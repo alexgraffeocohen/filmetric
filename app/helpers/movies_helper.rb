@@ -2,9 +2,7 @@ module MoviesHelper
 
   def quality_of(movie)
     average = (movie.critics_score + movie.audience_score)/2
-    if average > 88
-      "good"
-    elsif average > 75
+    if average > 75
       "good"
     elsif average.between?(50,75)
       "ok"

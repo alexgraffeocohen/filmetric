@@ -1,7 +1,6 @@
 <div class="row">
   <%= render 'layouts/nav' %>
 
-
   <div class="col-md-7" id="data-container">
     <h1><%= @movie.title %></h1>
       
@@ -9,25 +8,14 @@
 
     <div id="item-data">
       <h2>Info</h2>
-      <p>
-        Release Date: <%= @release %><br>
-        Rating: <%= @movie.rating %><br>
-        Directed By: <a href="<%= director_path(@movie.directors.first) %>">
-          <%= @movie.directors.first.name %></a>
-      </p>
-
+        <%= render 'info_box' %>
       <h2>Genres</h2>
       <ul>
-        <% @movie.genres.each do |genre| %>
-          <li><a href="<%= genre_path(genre.id) %>"><%= genre.name %></a></li>
-        <% end %>
+        <%= render @movie.genres %>
       </ul>
-
       <h2>Actors</h2>
       <ul>
-        <% @movie.actors.each do |actor| %>
-          <li><a href="<%= actor_path(actor.id) %>"><%= actor.name %></a></li>
-        <% end %>
+        <%= render @movie.actors %>
       </ul>
     </div>
   </div>

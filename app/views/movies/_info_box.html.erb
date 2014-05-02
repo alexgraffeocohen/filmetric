@@ -1,0 +1,8 @@
+<p>
+  Release Date: <%= @release %><br>
+  Rating: <%= @movie.rating %><br>
+  <% unless @movie.directors.empty? %>
+    Directed By: <a href="<%= director_path(@movie.directors.first) %>">
+      <%= @movie.directors.first.name %></a>
+  <% end %>
+</p>

@@ -7,6 +7,7 @@ FactoryGirl.define do
     release_date { "Fri, 10 Jan 2014" }
     critics_score { Faker::Number.number(2).to_i }
     audience_score { Faker::Number.number(2).to_i }
+    filmetric { critics_score - audience_score }
     critics_consensus { Faker::Lorem.sentence }
     poster_link { 'http://content9.flixster.com/movie/11/17/28/11172839_ori.jpg' }
     rating { 'R' }
