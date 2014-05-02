@@ -1,6 +1,7 @@
 # Filmetric
 
 [![Code Climate](https://codeclimate.com/github/alexwilkinson/filmetric_rails.png)](https://codeclimate.com/github/alexwilkinson/filmetric_rails)
+[![Coverage Status](https://coveralls.io/repos/alexwilkinson/filmetric_rails/badge.png?branch=master)](https://coveralls.io/r/alexwilkinson/filmetric_rails?branch=master)
 [![Build Status](https://travis-ci.org/alexwilkinson/filmetric_rails.svg?branch=master)](https://travis-ci.org/alexwilkinson/filmetric_rails)
 
 ## Summary
