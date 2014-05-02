@@ -1,8 +1,9 @@
 language: ruby
 rvm:
-  - "2.0.0"
+- 2.0.0
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp config/database.yml.travis config/database.yml
-# uncomment this line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+env:
+  global:
+    secure: Vj7GXuVMFRDcPfuskP98JhKeoA2lhIPDN8yLUBBblj9VnGG1VVGQGVjqwXhpHxPaGrDrdNdC34wEMDckD2Y4SPyYvEepy6xwt93RGxKOGFPTd3qtxiTp9b8eIoSHPg01n6Y+LZVKMZAXj9Wnvhr5eHLOmQD/DHlkY/8rp25MG2Y=
