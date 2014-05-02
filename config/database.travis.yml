@@ -1,0 +1,6 @@
+test:
+  adapter: postgresql
+  database: filmetric_test
+  pool: 5
+  username: Alex
+  password:
