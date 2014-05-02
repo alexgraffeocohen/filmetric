@@ -20,25 +20,25 @@ module MoviesHelper
       quality_response = "It’s damn good, "
     elsif average.between?(50,75)
       quality_response = "It’s decent, "
-    elsif average < 50
+    elsif average.between?(30,49)
       quality_response = "It’s kind of crap, "
-    elsif average < 30
-      quality_response = "It's crap, "
+    elsif average.between?(0,29)
+      quality_response = "It’s probably crap, "
     end
 
     filmetric_responses = {
     (16..25) => "and critics liked it a lot more!",
     (9..15) => "and critics liked it more.",
-    (4..8) => "and critics liked it a litte more.",
+    (4..8) => "and critics liked it a little more.",
     (-3..3) => "and everyone agrees.",
     (-8..-4) => "and audiences liked it a little more.",
     (-15..-9) => "and audiences liked it more.",
-    (-30..-15) => "and critics liked it a lot more!",
+    (-25..-16) => "and audiences liked it a lot more!",
     }
 
     if movie.filmetric > 25
       filmetric_response = "and critics are a little...too into it!"
-    elsif movie.filmetric < -30
+    elsif movie.filmetric < -25
       filmetric_response = "and audiences are a little...too into it!"
     else
       filmetric_responses.each do |range, phrase|
