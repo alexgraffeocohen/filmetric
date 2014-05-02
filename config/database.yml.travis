@@ -1,6 +1,4 @@
 test:
   adapter: postgresql
-  database: filmetric_test
-  pool: 5
-  username: Alex
-  password:
+  database: travis_ci_test
+  username: postgres
