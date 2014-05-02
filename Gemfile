@@ -10,6 +10,7 @@ gem 'chartkick'
 
 gem 'pg'
 gem 'figaro'
+gem 'coveralls', require: false
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
