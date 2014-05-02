@@ -1,4 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+ENV["RAILS_ENV"] ||= 'test'
+
+require 'rspec/rails'
+require 'rspec/autorun'
+require 'capybara/rspec'
+require 'open-uri'
+require 'faker'
 require 'simplecov'
 require 'coveralls'
 
@@ -9,14 +16,7 @@ SimpleCov.start do
   add_filter 'config/'
 end
 
-ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
-
-require 'rspec/rails'
-require 'rspec/autorun'
-require 'capybara/rspec'
-require 'open-uri'
-require 'faker'
 
 DatabaseCleaner.strategy = :truncation
 
