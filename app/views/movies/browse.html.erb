@@ -4,7 +4,7 @@
     <div class="form-group" id="search-box"> 
         <%= form_tag discover_path, { :method => :get, :class => "form-inline", :remote => true }  do %> 
           <%= label_tag :filmetric_score, "Flimetric", :class => "sr-only" %>
-          <%= select_tag :filmetric_score, options_for_select((1..100).to_a), :class => "form-control input-lg", :id => "categories" %>
+          <%= select_tag :filmetric_score, options_from_collection_for_select(@filmetric_evals, "first", "second"), :class => "form-control input-lg", :id => "categories" %>
 
           <%= label_tag :genre, "Genre", :class => "sr-only" %>
           <%= select_tag :genre, options_from_collection_for_select(@genres, "id", "name"), :class => "form-control input-lg", :id => "categories"  %>

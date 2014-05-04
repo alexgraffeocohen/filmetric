@@ -14,6 +14,26 @@ module MoviesHelper
     }
   end
 
+  def parse_for_browsing(response_hash)
+    array = []
+    response_hash.values.each_with_index do |response, i|
+       array << [i, strip(response)]
+    end
+    array
+  end
+
+  def strip(phrase)
+    phrase.gsub('...', ' ').gsub(/!|\./, '').gsub('and ', '').gsub(' it', '')
+  end
+
+  def retrieve_range_for(choice)
+    range = nil
+    filmetric_responses.keys.each_with_index do |key, i|
+      range = key if i == choice
+    end 
+    range
+  end
+
   def quality_of(movie)
     average = (movie.critics_score + movie.audience_score)/2
     if average > 75
@@ -48,7 +68,6 @@ module MoviesHelper
       end
     end
     
-
     quality_response + filmetric_response
   end
 end
