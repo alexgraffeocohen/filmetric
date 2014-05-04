@@ -1,5 +1,19 @@
 module MoviesHelper
 
+  def filmetric_responses 
+    {
+      (25..100) => "and critics are a little...too into it!",
+      (16..25) => "and critics liked it a lot more!",
+      (9..15) => "and critics liked it more.",
+      (4..8) => "and critics liked it a little more.",
+      (-3..3) => "and everyone likes it equally.",
+      (-8..-4) => "and audiences liked it a little more.",
+      (-15..-9) => "and audiences liked it more.",
+      (-25..-16) => "and audiences liked it a lot more!",
+      (-100..-25) => "and audiences are a little...too into it!"
+    }
+  end
+
   def quality_of(movie)
     average = (movie.critics_score + movie.audience_score)/2
     if average > 75
@@ -26,27 +40,14 @@ module MoviesHelper
       quality_response = "It’s probably crap, "
     end
 
-    filmetric_responses = {
-    (16..25) => "and critics liked it a lot more!",
-    (9..15) => "and critics liked it more.",
-    (4..8) => "and critics liked it a little more.",
-    (-3..3) => "and everyone agrees.",
-    (-8..-4) => "and audiences liked it a little more.",
-    (-15..-9) => "and audiences liked it more.",
-    (-25..-16) => "and audiences liked it a lot more!",
-    }
+    filmetric_response = ""
 
-    if movie.filmetric > 25
-      filmetric_response = "and critics are a little...too into it!"
-    elsif movie.filmetric < -25
-      filmetric_response = "and audiences are a little...too into it!"
-    else
-      filmetric_responses.each do |range, phrase|
-        if range.include?(movie.filmetric)
-          filmetric_response = phrase
-        end
+    filmetric_responses.each do |range, phrase|
+      if range.include?(movie.filmetric)
+        filmetric_response = phrase
       end
     end
+    
 
     quality_response + filmetric_response
   end

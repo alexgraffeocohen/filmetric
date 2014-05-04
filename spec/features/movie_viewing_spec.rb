@@ -83,7 +83,7 @@ feature 'Viewing Movies' do
     scenario 'viewing a movie on which people agree' do
       visit movie_path(@everyone_agrees.id)
 
-      expect(page).to have_content('and everyone agrees.')
+      expect(page).to have_content('and everyone likes it equally.')
     end
 
     scenario 'viewing a movie audiences like a little more' do
