@@ -14,24 +14,31 @@ module MoviesHelper
     }
   end
 
-  def parse_for_browsing(response_hash)
-    array = []
-    response_hash.values.each_with_index do |response, i|
-       array << [i, strip(response)]
-    end
-    array
+  def browsing_options
+    {
+      (16..100) => "critics like a lot more",
+      (4..15) => "critics like more",
+      (-3..3) => "critics and audiences like equally",
+      (-15..-4) => "audiences like more",
+      (-100..-16) => "audiences like a lot more"
+    }
   end
 
-  def strip(phrase)
-    phrase.gsub('...', ' ').gsub(/!|\./, '').gsub('and ', '').gsub(' it', '')
+  def options_for_browsing
+    indeces = (0..(browsing_options.keys.length-1)).to_a
+    responses = browsing_options.values
+    indeces.zip(responses)
   end
 
   def retrieve_range_for(choice)
-    range = nil
-    filmetric_responses.keys.each_with_index do |key, i|
-      range = key if i == choice
-    end 
-    range
+    browsing_options.keys[choice]
+  end
+
+  def find_choices_for(range, genre)
+    max = range.max
+    min = range.min
+
+    Movie.joins(:genre_movies).where("genre_id = #{Genre.first.id} AND filmetric >= #{min} AND filmetric <= #{max}")
   end
 
   def quality_of(movie)

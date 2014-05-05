@@ -1,0 +1,12 @@
+<div class="row">
+  <div id="movie-options">
+    <% i = 0 %>
+    <% unless @choices.nil? || @choices.empty? %>
+      <% @choices.each do |movie| %>
+        <a href="<%= movie_path(movie) %>"><img class="poster-thumbnail" src="<%= movie.poster_link %>"
+        style="left: <%= 17 + i %>px;"></a>
+        <% i += 250 %>
+      <% end %> 
+    <% end %>
+  </div>
+</div>

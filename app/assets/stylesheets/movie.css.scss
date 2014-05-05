@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.browse-form {
+  font-size: 20px;
+  display: inline-block;
+}
+
+#movie-options {
+  width: 1000px;
+  .poster-thumbnail {
+    position: absolute;
+    height: 292px;
+    width: 217px;
+    border-radius: 14px;
+    margin-top: 104px;
+  }
+}
+
 
 #poster-container {
   margin-top: 77px;
