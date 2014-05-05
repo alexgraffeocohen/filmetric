@@ -38,7 +38,7 @@ module MoviesHelper
     max = range.max
     min = range.min
 
-    Movie.joins(:genre_movies).where("genre_id = #{Genre.first.id} AND filmetric >= #{min} AND filmetric <= #{max}")
+    Movie.joins(:genre_movies).where("genre_id = #{genre.id} AND filmetric >= #{min} AND filmetric <= #{max}")
   end
 
   def quality_of(movie)
