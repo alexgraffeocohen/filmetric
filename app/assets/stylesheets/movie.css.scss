@@ -8,15 +8,16 @@
 }
 
 #movie-options {
-  .poster-thumbnail {
-    position: absolute;
-    height: 292px;
-    width: 217px;
-    border-radius: 14px;
-    margin-top: 104px;
+  margin-left: 40px;
+  .choice {
+    float: left;
+    padding: 5px;
+    .poster-thumbnail {
+      height: 292px;
+      width: 217px;
+    }
   }
 }
-
 
 #poster-container {
   margin-top: 77px;
