@@ -1,9 +1,11 @@
 <div class="row" id="movie-options">
-  <% unless choices.blank? %>
+  <% if !choices.blank? %>
     <% choices.each do |movie| %>
       <div class="choice">
         <a href="<%= movie_path(movie) %>"><img class="poster-thumbnail" src="<%= movie.poster_link %>"></a>
       </div>
     <% end %> 
+  <% else %>
+    <p id="notice">Sorry, no results were found.</p>
   <% end %>
 </div>
