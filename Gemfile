@@ -58,6 +58,7 @@ group :test do
   gem 'awesome_print'
   gem 'simplecov'
   gem 'rake'
+  gem 'capybara-webkit'
 end
 
 # Use ActiveModel has_secure_password
