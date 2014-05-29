@@ -39,7 +39,7 @@ module MoviesHelper
     min = range.min
 
     choices = Movie.joins(:genre_movies).where("genre_id = #{genre.id} AND filmetric >= #{min} AND filmetric <= #{max}")
-    choices.reject! { |choice| choice.poster_link == "http://images.rottentomatoescdn.com/images/redesign/poster_default.gif" }
+    choices.reject { |choice| choice.poster_link == "http://images.rottentomatoescdn.com/images/redesign/poster_default.gif" }
   end
 
   def quality_of(movie)

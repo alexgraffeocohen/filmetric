@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe MoviesHelper do
-  let(:movie) { create(:movie, critics_score: 90, audience_score: 85) }
+  let(:movie) { create(:movie, critics_score: 90, audience_score: 85, poster_link: "http://content9.flixster.com/movie/28/67/286791_ori.jpg") }
+  let(:no_poster) { create(:movie, critics_score: 90, audience_score: 85, poster_link: "http://images.rottentomatoescdn.com/images/redesign/poster_default.gif") }
   let(:genre) { create(:genre) }
 
   it 'provides filmetric responses for browsing form' do
@@ -29,5 +30,13 @@ describe MoviesHelper do
     range = (4..15)
 
     expect(helper.find_choices_for(range, genre)).to include(movie)
+  end
+
+  it 'can reject movies for browswing that don\'t have posters' do
+    movie.genres << genre
+    no_poster.genres << genre
+    range = (4..15)
+
+    expect(helper.find_choices_for(range, genre)).to_not include(no_poster)
   end
 end
