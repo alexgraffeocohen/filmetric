@@ -24,13 +24,13 @@ class SearchesController < ApplicationController
         return render "search"
       else
         return save_and_display(@results, query)
-      end 
+      end
     end
     redirect_to send("#{category.downcase}_path", @results.first) if @results.count == 1
   end
 
   def check_database(category, query)
-    if category == "Movie" 
+    if category == "Movie"
       Movie.where('lower(title) LIKE ?', "%#{query}%")
     else
       category.constantize.where('lower(name) LIKE ?', "%#{query}%")
@@ -43,7 +43,7 @@ class SearchesController < ApplicationController
       RTQuerier.find_by_title(query)
     end
   end
-  
+
   def save_and_display(rt_result, query)
     RTQuerier.save_to_db(rt_result)
     @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
