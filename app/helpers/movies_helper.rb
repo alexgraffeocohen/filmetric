@@ -1,6 +1,6 @@
 module MoviesHelper
 
-  def filmetric_responses 
+  def filmetric_responses
     {
       (25..100) => "and critics are a little...too into it!",
       (16..25) => "and critics liked it a lot more!",
@@ -75,7 +75,7 @@ module MoviesHelper
         filmetric_response = phrase
       end
     end
-    
+
     quality_response + filmetric_response
   end
 end

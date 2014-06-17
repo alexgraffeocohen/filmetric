@@ -15,10 +15,10 @@
   </div>
 
   <div id="row">
-    <div class="form-group" id="search-box"> 
-        <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %> 
+    <div class="form-group" id="search-box">
+        <%= form_tag searches_path, { :method => :get, :class => "form-inline" }  do %>
           <%= label_tag :category, "Category", :class => "sr-only" %>
-          <%= select_tag :category, 
+          <%= select_tag :category,
             "<option>Movie</option>
              <option>Actor</option>
              <option>Director</option>
@@ -26,7 +26,7 @@
 
           <%= label_tag :q, "Search", :class => "sr-only" %>
           <%= text_field_tag :q, "", :class => "form-control input-lg", :autofocus => true %>
-          
+
           <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
         <% end %>
     </div>
@@ -43,12 +43,12 @@
         <% ghostbusters = Movie.find_by(title: "Ghostbusters") %>
         <% movies = [her, gravity, children, die, avatar, ghostbusters] %>
         <% i = 0 %>
-        
+
         <% movies.each do |movie| %>
           <a href="<%= movie_path(movie) %>"><img id="poster-thumbnail" src="<%= movie.poster_link %>"
           style="left: <%= 17 + i %>px;"></a>
           <% i += 250 %>
-        <% end %>  
+        <% end %>
       </div>
     </div>
   </div>

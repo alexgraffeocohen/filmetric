@@ -1,8 +1,8 @@
 <div class="row">
   <%= render 'layouts/nav' %>
   <div id="search-container">
-    <div class="form-group" id="search-box"> 
-        <%= form_tag discover_path, { :method => :get, :class => "form-inline", :remote => true }  do %> 
+    <div class="form-group" id="search-box">
+        <%= form_tag discover_path, { :method => :get, :class => "form-inline", :remote => true }  do %>
           <p class="browse-form"> I want </p>
 
           <%= label_tag :genre, "Genre", :class => "sr-only" %>
