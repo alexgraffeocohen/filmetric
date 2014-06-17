@@ -85,17 +85,16 @@ feature 'Browsing' do
       )
     GenreMovie.create(genre: Genre.create(name: "Action", filmetric: -5), movie: gravity)
 
-    # let(:no_poster) { create(:movie, critics_score: 90, audience_score: 85, poster_link: "http://images.rottentomatoescdn.com/images/redesign/poster_default.gif") } 
-    # let(:movie) { create(:movie, critics_score: 90, audience_score: 85, poster_link: "http://content9.flixster.com/movie/28/67/286791_ori.jpg") } 
+    # let(:no_poster) { create(:movie, critics_score: 90, audience_score: 85, poster_link: "http://images.rottentomatoescdn.com/images/redesign/poster_default.gif") }
+    # let(:movie) { create(:movie, critics_score: 90, audience_score: 85, poster_link: "http://content9.flixster.com/movie/28/67/286791_ori.jpg") }
     # let(:genre) { Genre.create(name: "Action") }
-    range = (4..15)
   end
- 
-    # 20.times do 
+
+    # 20.times do
     #   genre.genre_movies.create(
-    #     movie: create(:movie, 
-    #       critics_score: 90, 
-    #       audience_score: 85, 
+    #     movie: create(:movie,
+    #       critics_score: 90,
+    #       audience_score: 85,
     #       poster_link: "http://content9.flixster.com/movie/28/67/286791_ori.jpg")
     #     )
     # end
