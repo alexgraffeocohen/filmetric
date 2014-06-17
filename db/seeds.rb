@@ -9,7 +9,7 @@
 the_departed = Movie.new(
 
                 :title => "The Departed",
-         :release_year => 2006,
+         :release_date => '2006-10-12',
             :filmetric => -2,
         :critics_score => 92,
        :audience_score => 94,
