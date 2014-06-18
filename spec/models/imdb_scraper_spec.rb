@@ -4,7 +4,7 @@ describe IMDBScraper do
   let(:url) {'http://www.imdb.com/search/title?at=0&groups=top_1000&sort=year,desc&view=simple'}
   let(:scraper) { IMDBScraper.new(url, 5) }
 
-  it 'has titles' do 
+  it 'has titles' do
     expect(scraper.ids).to eq([])
   end
 
@@ -27,4 +27,4 @@ describe IMDBScraper do
     scraper.scrape
     expect(scraper.ids.length).to_not eq(0)
   end
-end 
+end
