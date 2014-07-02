@@ -4,6 +4,10 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @release = @movie.release_date.strftime("%B %-e, %Y")
+    respond_to do |f|
+      f.html { render 'show' }
+      f.json { render json: @movie, status: 200 }
+    end
   end
 
   def browse
