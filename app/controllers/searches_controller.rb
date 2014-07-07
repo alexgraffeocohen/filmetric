@@ -59,7 +59,7 @@ class SearchesController < ApplicationController
     @results = Movie.where('lower(title) LIKE ?', "%#{query}%")
     if @results.empty?
       flash.now[:notice] = "I'm sorry, nothing matched what you were looking for."
-      f.html { return render "search" }
+      f.html { render "search" }
       f.json { render json: {}, status: 200 }
     end
     f.html { redirect_to movie_path(@results.first) if @results.count == 1 }
