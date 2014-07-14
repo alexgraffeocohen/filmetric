@@ -13,6 +13,10 @@ class MoviesController < ApplicationController
   def browse
     @filmetric_evals = options_for_browsing
     @genres = Genre.all.select { |genre| genre.movies.length >= 20 }
+    respond_to do |f|
+      f.html { render 'browse' }
+      f.json { render json: {genres: @genres, filmetricEvals: @filmetric_evals}, status: 200 }
+    end
   end
 
   def discover
