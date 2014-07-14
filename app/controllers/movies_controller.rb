@@ -23,6 +23,10 @@ class MoviesController < ApplicationController
     range = retrieve_range_for(params["filmetric_eval"].to_i)
     genre = Genre.find(params["genre"].to_i)
     @choices = find_choices_for(range, genre)
+    respond_to do |f|
+      f.js
+      f.json { render json: @choices, status: 200 }
+    end
   end
 
 end
