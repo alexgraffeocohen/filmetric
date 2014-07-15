@@ -31,7 +31,7 @@ class SearchesController < ApplicationController
     end
 
     @results = results_from_db
-    f.json { render json: @results, status: 200 }
+    f.json { render json: @results, include: [:actors, :genres, :directors], status: 200 }
     if @results.count == 1
       f.html { redirect_to send("#{category.downcase}_path", results_from_db.first) }
     else
