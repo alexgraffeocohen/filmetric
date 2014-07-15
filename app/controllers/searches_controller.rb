@@ -63,6 +63,6 @@ class SearchesController < ApplicationController
       f.json { render json: {}, status: 200 }
     end
     f.html { redirect_to movie_path(@results.first) if @results.count == 1 }
-    f.json { render json: @results, status: 200 }
+    f.json { render json: @results, include: [:actors, :genres, :directors], status: 200 }
   end
 end

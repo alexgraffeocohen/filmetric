@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     @choices = find_choices_for(range, genre)
     respond_to do |f|
       f.js
-      f.json { render json: @choices, status: 200 }
+      f.json { render json: @choices, include: [:actors, :genres, :directors], status: 200 }
     end
   end
 
