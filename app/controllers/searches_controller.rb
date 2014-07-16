@@ -30,12 +30,26 @@ class SearchesController < ApplicationController
       end
     end
 
-    @results = results_from_db
+    @results = specify_query(results_from_db)
     f.json { render json: @results, include: [:actors, :genres, :directors], status: 200 }
     if @results.count == 1
       f.html { redirect_to send("#{category.downcase}_path", results_from_db.first) }
     else
       f.html { render "show" }
+    end
+  end
+
+  def specify_query(results)
+    new_results = []
+    if params[:actor]
+      results.includes(:actors).each do |result|
+        new_results << result if result.actors.include?(Actor.where('lower(name) LIKE ?', "%#{params[:actor]}%"))
+      end
+    end
+    if new_results.empty?
+      results
+    else
+      new_results
     end
   end
 
