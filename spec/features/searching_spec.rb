@@ -83,13 +83,13 @@ feature 'Search' do
               :rt_link => "http://www.rottentomatoes.com/m/ghostbusters/",
             :filmetric => 9
       )
-    
+
     DirectorMovie.create(director: Director.create(name: "Alfonso Cuaron"), movie: gravity)
     ActorMovie.create(actor: Actor.create(name: "Sandra Bullock"), movie: gravity)
     GenreMovie.create(genre: Genre.create(name: "Action", filmetric: -5), movie: gravity)
   end
 
-  scenario 'searching for movie that is in database' do   
+  scenario 'searching for movie that is in database' do
     visit search_path
     select('Movie', :from => 'category')
     fill_in 'q', with: 'Gravity'
@@ -115,7 +115,7 @@ feature 'Search' do
     click_button('Search')
 
     expect(page).to have_content("The Iron Giant")
-  end 
+  end
 
   scenario 'searching for movie that cannot be found' do
     visit search_path
@@ -125,7 +125,7 @@ feature 'Search' do
 
     expect(page).to have_content("I'm sorry, nothing matched what you were looking for")
   end
-   
+
   scenario 'searching for actor that is in database' do
     visit search_path
     select('Actor', :from => 'category')
@@ -205,4 +205,4 @@ feature 'Search' do
     expect(page).to have_content("I'm sorry, nothing matched what you were looking for")
   end
 end
-   
+

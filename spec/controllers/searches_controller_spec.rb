@@ -20,10 +20,16 @@ describe SearchesController do
       @carlos = create(:director, name: "Carlos Cuaron")
       @director = create(:director)
       @genre = create(:genre)
+      @die_hard.actors << @owen
     end
 
     it 'processes movie search with multiple results' do
       get :show, { q: 'die hard', category: 'Movie' }
+      expect(response).to be_a_success
+    end
+
+    it 'returns movie results with actor specified' do
+      get :show, { q: 'die hard', category: 'Movie', actor: 'Owen Wilson' }
       expect(response).to be_a_success
     end
 

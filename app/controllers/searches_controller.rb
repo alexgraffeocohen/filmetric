@@ -57,7 +57,8 @@ class SearchesController < ApplicationController
     if category == "Movie"
       Movie.where('lower(title) LIKE ?', "%#{query}%")
     else
-      category.constantize.where('lower(name) LIKE ?', "%#{query}%")
+      category_table = category.constantize.arel_table
+      category.constantize.where(category_table[:name].matches("%#{query}%"))
     end
   end
 
