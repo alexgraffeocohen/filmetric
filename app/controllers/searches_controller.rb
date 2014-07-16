@@ -40,7 +40,9 @@ class SearchesController < ApplicationController
   end
 
   def specify_query(results)
-    if params[:actor]
+    if params[:actor] && params[:director]
+      execute_specified_query(results, 'director', 'actor')
+    elsif params[:actor]
       execute_specified_query(results, 'actor')
     elsif params[:director]
       execute_specified_query(results, 'director')
@@ -49,13 +51,18 @@ class SearchesController < ApplicationController
     end
   end
 
-  def execute_specified_query(results, category)
+  def execute_specified_query(results, category, extra_category = nil)
     category_class = category.capitalize.constantize
-    results.includes(category.pluralize.to_sym).map { |result|
+    new_results = results.map { |result|
       name = params[category.to_sym]
       table = category_class.arel_table
       result if result.send(category.pluralize).include?(category_class.where(table[:name].matches("%#{name}%")).first)
     }.compact
+    if extra_category == nil
+      new_results
+    else
+      execute_specified_query(new_results, extra_category)
+    end
   end
 
   def check_database(category, query)

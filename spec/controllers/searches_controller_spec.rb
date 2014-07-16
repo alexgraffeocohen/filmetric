@@ -14,17 +14,23 @@ describe SearchesController do
       @die_hard2 = create(:movie, title: "Die Hard 2")
       @gravity = create(:movie, title: "Gravity")
       @gravity2 = create(:movie, title: "Gravity 2")
+      @her = create(:movie, title: "Her")
+      @wild_things = create(:movie, title: "Where The Wild Things Are")
       @movie = create(:movie)
       @owen = create(:actor, name: "Owen Wilson")
       @luke = create(:actor, name: "Luke Wilson")
       @bruce = create(:actor, name: "Bruce Willis")
+      @amy = create(:actor, name: "Amy Adams")
       @actor = create(:actor)
       @alfonso = create(:director, name: "Alfonso Cuaron")
       @carlos = create(:director, name: "Carlos Cuaron")
+      @spike = create(:director, name: "Spike Jonze")
       @director = create(:director)
       @genre = create(:genre)
       @die_hard.actors << @bruce
       @gravity.directors << @alfonso
+      @spike.movies << @wild_things << @her
+      @her.actors << @amy
     end
 
     it 'processes movie search with multiple results' do
@@ -44,6 +50,11 @@ describe SearchesController do
 
     it 'redirects to movie where there is one result because director was specified' do
       get :show, { q: 'gravity', category: 'Movie', director: 'Alfonso Cuaron' }
+      expect(response).to be_a_redirect
+    end
+
+    it 'redirects to movie where there is one result because actor and director were specified' do
+      get :show, { q: 'her', category: 'Movie', director: 'Spike Jonze', actor: 'Amy Adams' }
       expect(response).to be_a_redirect
     end
 
