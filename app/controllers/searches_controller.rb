@@ -43,7 +43,9 @@ class SearchesController < ApplicationController
     new_results = []
     if params[:actor]
       results.includes(:actors).each do |result|
-        new_results << result if result.actors.include?(Actor.where('lower(name) LIKE ?', "%#{params[:actor]}%"))
+        actor_name = params[:actor]
+        actors = Actor.arel_table
+        new_results << result if result.actors.include?(Actor.where(actors[:name].matches("%#{actor_name}%")).first)
       end
     end
     if new_results.empty?

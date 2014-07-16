@@ -12,15 +12,19 @@ describe SearchesController do
     before(:each) do
       @die_hard = create(:movie, title: "Die Hard")
       @die_hard2 = create(:movie, title: "Die Hard 2")
+      @gravity = create(:movie, title: "Gravity")
+      @gravity2 = create(:movie, title: "Gravity 2")
       @movie = create(:movie)
       @owen = create(:actor, name: "Owen Wilson")
       @luke = create(:actor, name: "Luke Wilson")
+      @bruce = create(:actor, name: "Bruce Willis")
       @actor = create(:actor)
       @alfonso = create(:director, name: "Alfonso Cuaron")
       @carlos = create(:director, name: "Carlos Cuaron")
       @director = create(:director)
       @genre = create(:genre)
-      @die_hard.actors << @owen
+      @die_hard.actors << @bruce
+      @gravity.directors << @alfonso
     end
 
     it 'processes movie search with multiple results' do
@@ -28,13 +32,13 @@ describe SearchesController do
       expect(response).to be_a_success
     end
 
-    it 'returns movie results with actor specified' do
-      get :show, { q: 'die hard', category: 'Movie', actor: 'Owen Wilson' }
-      expect(response).to be_a_success
-    end
-
     it 'redirects to movie when there is one result' do
       get :show, { q: @movie.title, category: 'Movie' }
+      expect(response).to be_a_redirect
+    end
+
+    it 'redirects to movie where there is one result because actor was specified' do
+      get :show, { q: 'die hard', category: 'Movie', actor: 'Bruce Willis' }
       expect(response).to be_a_redirect
     end
 
