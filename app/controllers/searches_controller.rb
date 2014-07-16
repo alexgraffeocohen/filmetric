@@ -40,25 +40,22 @@ class SearchesController < ApplicationController
   end
 
   def specify_query(results)
-    new_results = []
     if params[:actor]
-      results.includes(:actors).each do |result|
-        actor_name = params[:actor]
-        actors = Actor.arel_table
-        new_results << result if result.actors.include?(Actor.where(actors[:name].matches("%#{actor_name}%")).first)
-      end
+      execute_specified_query(results, 'actor')
     elsif params[:director]
-      results.includes(:directors).each do |result|
-        director_name = params[:director]
-        directors = Director.arel_table
-        new_results << result if result.directors.include?(Director.where(directors[:name].matches("%#{director_name}%")).first)
-      end
-    end
-    if new_results.empty?
-      results
+      execute_specified_query(results, 'director')
     else
-      new_results
+      results
     end
+  end
+
+  def execute_specified_query(results, category)
+    category_class = category.capitalize.constantize
+    results.includes(category.pluralize.to_sym).map { |result|
+      name = params[category.to_sym]
+      table = category_class.arel_table
+      result if result.send(category.pluralize).include?(category_class.where(table[:name].matches("%#{name}%")).first)
+    }.compact
   end
 
   def check_database(category, query)
