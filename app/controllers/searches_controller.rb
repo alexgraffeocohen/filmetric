@@ -47,6 +47,12 @@ class SearchesController < ApplicationController
         actors = Actor.arel_table
         new_results << result if result.actors.include?(Actor.where(actors[:name].matches("%#{actor_name}%")).first)
       end
+    elsif params[:director]
+      results.includes(:directors).each do |result|
+        director_name = params[:director]
+        directors = Director.arel_table
+        new_results << result if result.directors.include?(Director.where(directors[:name].matches("%#{director_name}%")).first)
+      end
     end
     if new_results.empty?
       results
