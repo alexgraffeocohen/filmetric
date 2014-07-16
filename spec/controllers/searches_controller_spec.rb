@@ -42,6 +42,11 @@ describe SearchesController do
       expect(response).to be_a_redirect
     end
 
+    it 'redirects to movie where there is one result because director was specified' do
+      get :show, { q: 'gravity', category: 'Movie', director: 'Alfonso Cuaron' }
+      expect(response).to be_a_redirect
+    end
+
     it 'redirects to movie when found on RT' do
       get :show, { q: 'the iron giant', category: 'Movie' }
       expect(response).to be_a_redirect
