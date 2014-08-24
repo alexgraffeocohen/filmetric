@@ -1,1 +1,2 @@
-$("body").append("<%= j render(:partial => 'options', locals: {choices: @choices}) %>")
+$("#movie-options").remove();
+$("body").append("<%= j render(:partial => 'options', locals: {choices: @choices}) %>");
